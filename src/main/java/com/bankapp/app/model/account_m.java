@@ -14,7 +14,7 @@ public class account_m {
 	@Id
 	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
 	@Column(name = "acc_no",nullable = false)
-	private String acc_no;
+	private int acc_no;
 	@Column(name = "user_id",nullable = false)
 	private String user_id;
 	@Column(name = "customer_id",nullable = false)
@@ -23,10 +23,10 @@ public class account_m {
 	private String log_pass;
 	@Column(name = "trans_pass",nullable = false)
 	private String trans_pass;
-	public String getAcc_no() {
+	public int getAcc_no() {
 		return acc_no;
 	}
-	public void setAcc_no(String acc_no) {
+	public void setAcc_no(int acc_no) {
 		this.acc_no = acc_no;
 	}
 	public String getUser_id() {

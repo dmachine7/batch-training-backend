@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tbl_customer")
@@ -17,6 +18,7 @@ public class customer_m {
 	@Id
 	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
 	@Column(name = "id",nullable = false)
+	@NotBlank
 	private int id;
 	@Column(name = "title",nullable = false)
 	private String title;
