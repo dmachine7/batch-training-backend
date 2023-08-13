@@ -22,6 +22,19 @@ public class transaction_m {
 	private String send_acc;
 	@Column(name = "rec_acc",nullable = false)
 	private String rec_acc;
+	@Column(name = "trans_type",nullable = false)
+	private String trans_type;
+	@Column(name = "trans_pass",nullable = false)
+	private String trans_pass;
+	@DateTimeFormat(pattern = "dd-MM-yyy")
+	@Column(name = "date",nullable = false)
+	private Date date;
+	@Column(name = "amount",nullable = false)
+	private long amount;
+	@Column(name = "remarks")
+	private String remarks;
+	@Column(name = "maturity_ins")
+	private String maturity_ins;
 	public int getTrans_id() {
 		return trans_id;
 	}
@@ -76,17 +89,5 @@ public class transaction_m {
 	public void setMaturity_ins(String maturity_ins) {
 		this.maturity_ins = maturity_ins;
 	}
-	@Column(name = "trans_type",nullable = false)
-	private String trans_type;
-	@Column(name = "trans_pass",nullable = false)
-	private String trans_pass;
-	@DateTimeFormat(pattern = "dd-MM-yyy")
-	@Column(name = "date",nullable = false)
-	private Date date;
-	@Column(name = "amount",nullable = false)
-	private long amount;
-	@Column(name = "remarks",nullable = false)
-	private String remarks;
-	@Column(name = "maturity_ins",nullable = false)
-	private String maturity_ins;
+	
 }
