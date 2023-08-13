@@ -16,13 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bankapp.app.model.customer_m;
-import com.bankapp.app.service.customer_service;
+import com.bankapp.app.service.customer_implementation;
 
 @RestController
 @RequestMapping("/api/customer")
 public class customer_controller {
 	@Autowired
-	private customer_service customer_service_provider;
+	private customer_implementation customer_service_provider;
 	//get mappings start
 	@GetMapping("/testing")
 	public String test() {

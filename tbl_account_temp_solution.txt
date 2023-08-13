@@ -1,0 +1,16 @@
+[
+    {
+        "acc_no": 100,
+        "user_id": "rahul",
+        "customer_id": 1,
+        "log_pass": "rahul",
+        "trans_pass": "rahul"
+    },
+    {
+        "acc_no": 101,
+        "user_id": "atul",
+        "customer_id": 2,
+        "log_pass": "atul",
+        "trans_pass": "atul"
+    }
+]
