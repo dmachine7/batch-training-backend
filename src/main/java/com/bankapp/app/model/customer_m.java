@@ -10,7 +10,10 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tbl_customer")
@@ -20,30 +23,57 @@ public class customer_m {
 	@Column(name = "id",nullable = false)
 	@NotBlank
 	private int id;
+	
+	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
+	@Column(name = "acc_no",nullable = false)
+	private int acc_no;
+	
 	@Column(name = "title",nullable = false)
+	@NotEmpty(message = "Title field can't be empty.")
 	private String title;
+	
 	@Column(name = "name",nullable = false)
+	@NotEmpty(message = "name field can't be empty.")
 	private String name;
+	
 	@Column(name = "father_name",nullable = false)
+	@NotEmpty(message = "Father name field can't be empty.")
 	private String father_name;
+	
 	@Column(name = "mobile",nullable = false)
+	@NotEmpty(message = "Mobile number field can't be empty.")
+	@Size(min = 10, max = 10, message = "Mobile number must be of 10 characters.")
 	private String mobile;
+	
 	@Column(name = "email",nullable = false)
+	@Email(message = "This is not a valid Email.")
 	private String email;
+	
 	@Column(name = "aadhar",nullable = false)
+	@NotEmpty(message = "Aadhar Number field can't be empty.")
+	@Size(min = 12, max = 12, message = "Aadhar Number must be of 12 characters.")
 	private String aadhar;
+	
 	@DateTimeFormat(pattern = "dd-MM-yyy")
 	@Column(name = "dob",nullable = false)
 	private Date dob;
+	
 	@Column(name = "per_address",nullable = false)
+	@NotEmpty(message = "Address field can't be empty.")
 	private String per_address;
+	
 	@Column(name = "res_address",nullable = false)
 	private String res_address;
+	
 	@Column(name = "occ_type",nullable = false)
 	private String occ_type;
+	
 	@Column(name = "source_income",nullable = false)
+	@NotEmpty(message = "source_income field can't be empty.")
 	private String source_income;
+	
 	@Column(name = "gross_annual_income",nullable = false)
+	@NotEmpty(message = "gross_annual_income field can't be empty.")
 	private String gross_annual_income;
 	
 	public customer_m() {

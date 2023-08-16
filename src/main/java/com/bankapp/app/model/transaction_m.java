@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "tbl_transaction")
@@ -17,24 +18,37 @@ public class transaction_m {
 	@Id
 	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
 	@Column(name = "trans_id",nullable = false)
+	@NotEmpty(message = "The transaction id can't be Empty")
 	private int trans_id;
+	
 	@Column(name = "send_acc",nullable = false)
+	@NotEmpty(message = "The sender's account number can't be Empty")
 	private String send_acc;
+	
 	@Column(name = "rec_acc",nullable = false)
+	@NotEmpty(message = "The sender's account number can't be Empty")
 	private String rec_acc;
+	
 	@Column(name = "trans_type",nullable = false)
 	private String trans_type;
+	
 	@Column(name = "trans_pass",nullable = false)
+	@NotEmpty(message = "Thetransaction password can't be Empty")
 	private String trans_pass;
+	
 	@DateTimeFormat(pattern = "dd-MM-yyy")
 	@Column(name = "date",nullable = false)
 	private Date date;
+	
 	@Column(name = "amount",nullable = false)
 	private long amount;
+	
 	@Column(name = "remarks")
 	private String remarks;
+	
 	@Column(name = "maturity_ins")
 	private String maturity_ins;
+	
 	public int getTrans_id() {
 		return trans_id;
 	}

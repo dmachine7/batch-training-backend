@@ -2,7 +2,6 @@ package com.bankapp.app.controller;
 
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.bankapp.app.exception.ResourceNotFoundException;
 import com.bankapp.app.model.transaction_m;
 import com.bankapp.app.service.transaction_implementation;
 
@@ -36,8 +35,9 @@ public class transaction_controller {
 		return transaction_service_provider.getAllLogin();
 	}
 	@GetMapping("/{id}")
-	public Optional<transaction_m> getById(@PathVariable Integer id ){
-		return transaction_service_provider.getById(id);
+	public ResponseEntity<transaction_m> getById(@PathVariable Integer id ){
+		return ResponseEntity.ok(transaction_service_provider.getById(id).orElseThrow(
+				()-> new ResourceNotFoundException("transaction not found for this id :: " + id)));
 	}
 	//get mappings end
 	//post mappings start
@@ -50,7 +50,9 @@ public class transaction_controller {
 	//update/put mappings start
 	@PutMapping("/update/{id}")
 	public ResponseEntity<transaction_m> update_user(@PathVariable int id, @RequestBody transaction_m transaction){
-		transaction_m find_transaction = transaction_service_provider.getById(id).orElseThrow();
+		transaction_m find_transaction = transaction_service_provider.getById(id).orElseThrow(
+				()-> new ResourceNotFoundException("transaction not found for this id :: " + id)
+				);
 		find_transaction.setTrans_id(transaction.getTrans_id());
 		find_transaction.setAmount(transaction.getAmount());
 		transaction_m updated_transaction = transaction_service_provider.saveLogin(find_transaction);
@@ -60,7 +62,9 @@ public class transaction_controller {
 	//delete mappings start
 	@DeleteMapping("/remove/{id}")
 	public String delete_user(@PathVariable int id){
-		transaction_m find_transaction = transaction_service_provider.getById(id).orElseThrow();
+		transaction_m find_transaction = transaction_service_provider.getById(id).orElseThrow(
+				()-> new ResourceNotFoundException("transaction not found for this id :: " + id)
+				);
 		transaction_service_provider.remove_user(find_transaction);
 		return "transaction deleted";
 	}
