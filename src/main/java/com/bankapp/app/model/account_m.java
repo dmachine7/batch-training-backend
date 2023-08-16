@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotEmpty;
 
 
 @Entity
@@ -15,14 +17,31 @@ public class account_m {
 	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
 	@Column(name = "acc_no",nullable = false)
 	private int acc_no;
+	
 	@Column(name = "user_id",nullable = false)
+	@NotEmpty(message = "The user id can't be Empty")
+	@NotBlank 
 	private String user_id;
+	
 	@Column(name = "customer_id",nullable = false)
 	private int customer_id;
+	
 	@Column(name = "log_pass",nullable = false)
+	@NotEmpty(message = "The login password can't be Empty")
 	private String log_pass;
+	
 	@Column(name = "trans_pass",nullable = false)
+	@NotEmpty(message = "The transaction password can't be Empty")
 	private String trans_pass;
+	
+	@Column(name = "balance",nullable = false)
+	private int balance;
+	public int getBalance() {
+		return balance;
+	}
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
 	public int getAcc_no() {
 		return acc_no;
 	}
