@@ -21,7 +21,6 @@ public class customer_m {
 	@Id
 	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
 	@Column(name = "id",nullable = false)
-	@NotBlank
 	private int id;
 	
 	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
@@ -56,7 +55,7 @@ public class customer_m {
 	
 	@DateTimeFormat(pattern = "dd-MM-yyy")
 	@Column(name = "dob",nullable = false)
-	private Date dob;
+	private String dob;
 	
 	@Column(name = "per_address",nullable = false)
 	@NotEmpty(message = "Address field can't be empty.")
@@ -88,7 +87,7 @@ public class customer_m {
 						String mobile,
 						String email,
 						String aadhar,
-						Date dob, 
+						String dob, 
 						String per_address, 
 						String res_address,
 						String occ_type,
@@ -168,10 +167,10 @@ public class customer_m {
 	public void setAadhar(String aadhar) {
 		this.aadhar = aadhar;
 	}
-	public Date getDob() {
+	public String getDob() {
 		return dob;
 	}
-	public void setDob(Date dob) {
+	public void setDob(String dob) {
 		this.dob = dob;
 	}
 	public String getRes_address() {

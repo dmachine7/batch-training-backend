@@ -1,10 +1,8 @@
 package com.bankapp.app.test;
 
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
-import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -58,7 +56,7 @@ class testForCustomer {
 				"1234567891",
 				"chinmoi@gmail.com",
 				"123443211234",
-				new Date(), 
+				"2001-01-01", 
 				"abc", 
 				"abc",
 				"employee",
