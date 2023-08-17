@@ -21,7 +21,6 @@ public class customer_m {
 	@Id
 	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
 	@Column(name = "id",nullable = false)
-	@NotBlank
 	private int id;
 	
 	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
