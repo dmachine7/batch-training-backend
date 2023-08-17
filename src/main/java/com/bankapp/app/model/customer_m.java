@@ -26,7 +26,7 @@ public class customer_m {
 	
 	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
 	@Column(name = "acc_no",nullable = false)
-	private int acc_no;
+	private int acc_no ;
 	
 	@Column(name = "title",nullable = false)
 	@NotEmpty(message = "Title field can't be empty.")
@@ -75,10 +75,60 @@ public class customer_m {
 	@Column(name = "gross_annual_income",nullable = false)
 	@NotEmpty(message = "gross_annual_income field can't be empty.")
 	private String gross_annual_income;
+	@Column(name = "balance", nullable = false)
+	private int balance;
 	
-	public customer_m() {
-		
+	public customer_m() {}
+	public customer_m
+	( int id, 
+						int acc_no,
+						String title,
+						String name,
+						String father_name,
+						String mobile,
+						String email,
+						String aadhar,
+						Date dob, 
+						String per_address, 
+						String res_address,
+						String occ_type,
+						String source_income,
+						String gross_annual_income,
+						int balance) {
+
+		this.id = id;
+		this.acc_no = acc_no;
+		this.title = title;
+		this.name = name;
+		this.father_name = father_name;
+		this.mobile = mobile;
+		this.email = email;
+		this.aadhar = aadhar;
+		this.dob = dob;
+		this.per_address = per_address;
+		this.res_address = res_address;
+		this.occ_type = occ_type;
+		this.source_income = source_income;
+		this.gross_annual_income = gross_annual_income;
+		this.balance = balance;
 	}
+
+	public int getBalance() {
+		return balance;
+	}
+
+	public void setBalance(int balance) {
+		this.balance = balance;
+	}
+	
+	public int getAcc_no() {
+		return acc_no;
+	}
+
+	public void setAcc_no(int acc_no) {
+		this.acc_no = acc_no;
+	}
+
 	public int getId() {
 		return id;
 	}

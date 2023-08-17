@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import com.bankapp.app.service.customer_implementation;
 
 @RestController
 @RequestMapping("/api/customer")
+@CrossOrigin("http://localhost:3000/")
 public class customer_controller {
 	@Autowired
 	private customer_implementation customer_service_provider;
@@ -36,6 +38,16 @@ public class customer_controller {
 	public ResponseEntity<customer_m> getById(@PathVariable Integer id ){
 		return  ResponseEntity.ok(customer_service_provider.getById(id).orElseThrow(
 				()-> new ResourceNotFoundException("Product not found for this id :: " + id)));
+	}
+	@GetMapping("/getByAcc/{id}")
+	public ResponseEntity<customer_m > getCustomerAcc(@PathVariable int id ){
+		
+			customer_m customer_acc = customer_service_provider.getCustomerAcc(id).orElseThrow(
+					()-> new ResourceNotFoundException("transaction not found for this id :: " + id)
+					);
+			return ResponseEntity.ok(customer_acc);
+		
+		
 	}
 	//get mappings end
 	//post mappings start

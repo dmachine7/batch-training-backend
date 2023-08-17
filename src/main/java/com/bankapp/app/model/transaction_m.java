@@ -33,7 +33,7 @@ public class transaction_m {
 	private String trans_type;
 	
 	@Column(name = "trans_pass",nullable = false)
-	@NotEmpty(message = "Thetransaction password can't be Empty")
+	@NotEmpty(message = "The transaction password can't be Empty")
 	private String trans_pass;
 	
 	@DateTimeFormat(pattern = "dd-MM-yyy")

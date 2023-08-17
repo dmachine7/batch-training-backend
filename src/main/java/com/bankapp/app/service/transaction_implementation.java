@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.bankapp.app.exception.ResourceNotFoundException;
 import com.bankapp.app.model.transaction_m;
 import com.bankapp.app.repository.transaction_repository;
 
@@ -34,6 +35,9 @@ public class transaction_implementation implements transaction_service{
 	public void remove_user(transaction_m transaction) {
 		transaction_repo.delete(transaction);
 		
+	}
+	public Optional<List<transaction_m> > getByAcc(int id) {
+		return transaction_repo.getAccountTrans(id);
 	}
 
 }
