@@ -2,10 +2,12 @@ package com.bankapp.app.controller;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,7 @@ import com.bankapp.app.service.transaction_implementation;
 
 @RestController
 @RequestMapping("/api/transaction")
+@CrossOrigin("http://localhost:3000/")
 public class transaction_controller {
 	@Autowired
 	private transaction_implementation transaction_service_provider;
@@ -35,9 +38,14 @@ public class transaction_controller {
 		return transaction_service_provider.getAllLogin();
 	}
 	@GetMapping("/{id}")
-	public ResponseEntity<transaction_m> getById(@PathVariable Integer id ){
-		return ResponseEntity.ok(transaction_service_provider.getById(id).orElseThrow(
-				()-> new ResourceNotFoundException("transaction not found for this id :: " + id)));
+	public ResponseEntity<List<transaction_m> > getbyacc(@PathVariable int id ){
+		
+			List<transaction_m> trans_list = transaction_service_provider.getByAcc(id).orElseThrow(
+					()-> new ResourceNotFoundException("transaction not found for this id :: " + id)
+					);
+			return ResponseEntity.ok(trans_list);
+		
+		
 	}
 	//get mappings end
 	//post mappings start
