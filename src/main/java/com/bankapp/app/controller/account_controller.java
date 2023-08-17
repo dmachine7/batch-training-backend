@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import com.bankapp.app.service.account_implementation;
 
 @RestController
 @RequestMapping("/api/account")
+@CrossOrigin("http://localhost:3000/")
 public class account_controller {
 	@Autowired
 	private account_implementation account_service_provider;
@@ -40,6 +42,9 @@ public class account_controller {
 	//post mappings start
 	@PostMapping("/sendData")
 	public String getData(@Validated @RequestBody account_m log_user){
+		System.out.println(log_user.getAcc_no());
+		System.out.println(log_user.getCustomer_id());
+		System.out.print("jaldjfalkjalfj");
 		account_service_provider.saveLogin(log_user);
 		return "Added Successfully";		
 	}
@@ -47,6 +52,8 @@ public class account_controller {
 	//update/put mappings start
 		@PutMapping("/update/{id}")
 		public ResponseEntity<account_m> update_user(@PathVariable int id, @RequestBody account_m user_details){
+			System.out.print(user_details);
+			System.out.print("jaldjfalkjalfj");
 			account_m find_user = account_service_provider.getById(id).orElseThrow();
 			find_user.setUser_id(user_details.getUser_id());
 			find_user.setLog_pass(user_details.getLog_pass());
