@@ -53,8 +53,11 @@ public class customer_controller {
 	//post mappings start
 	@PostMapping("/sendData")
 	public String getData(@Validated @RequestBody customer_m log_user){
-		customer_service_provider.saveLogin(log_user);
-		return "Added Successfully";		
+		customer_m temp = customer_service_provider.saveLogin(log_user);
+		System.out.println(temp.getAcc_no());
+		customer_m new_temp = customer_service_provider.getById(temp.getId()).orElseThrow();
+		System.out.println(new_temp.getBalance());
+		return "Added Successfully " + "and your account number is" + new_temp.getAcc_no();		
 	}
 	//post mappings end
 	//update/put mappings start

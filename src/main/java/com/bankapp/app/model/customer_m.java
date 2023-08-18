@@ -2,6 +2,8 @@ package com.bankapp.app.model;
 
 import java.util.Date;
 
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
@@ -22,9 +24,9 @@ public class customer_m {
 	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
 	@Column(name = "id",nullable = false)
 	private int id;
-	
-	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
-	@Column(name = "acc_no",nullable = false)
+
+	@GeneratedValue(strategy =  GenerationType.IDENTITY)
+	@Column(name = "acc_no", insertable = false)
 	private int acc_no ;
 	
 	@Column(name = "title",nullable = false)
