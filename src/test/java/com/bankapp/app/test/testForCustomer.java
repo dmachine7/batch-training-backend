@@ -73,10 +73,18 @@ class testForCustomer {
 	                .andDo(print())
 	                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
 	                .andExpect(status().isOk())
-	                .andExpect(jsonPath("$.id", is(5)))/*
-	                .andExpect(jsonPath("$.name", is("Book Name")))
-	                .andExpect(jsonPath("$.author", is("Cts")))
-	                .andExpect(jsonPath("$.price", is(9.99)))*/;
+	                .andExpect(jsonPath("$.id", is(5)))
+	                .andExpect(jsonPath("$.name", is("Chinmoi")))
+	                .andExpect(jsonPath("$.father_name", is("Chinmoi's Father")))
+	                .andExpect(jsonPath("$.mobile", is("1234567891")))
+	                .andExpect(jsonPath("$.email", is("chinmoi@gmail.com")))
+	                .andExpect(jsonPath("$.aadhar", is("123443211234")))
+	                .andExpect(jsonPath("$.per_address", is("abc")))
+	                .andExpect(jsonPath("$.res_address", is("abc")))
+	                .andExpect(jsonPath("$.occ_type", is("employee")))
+	                .andExpect(jsonPath("$.source_income", is("self")))
+	                .andExpect(jsonPath("$.gross_annual_income", is("100")))
+	                .andExpect(jsonPath("$.balance", is(100)));
 	
 	        verify(customer_service_provider, times(1)).getById(5);
 	    }

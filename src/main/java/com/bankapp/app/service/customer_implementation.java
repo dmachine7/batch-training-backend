@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service;
 import com.bankapp.app.model.customer_m;
 import com.bankapp.app.repository.customer_repository;
 
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.Persistence;
+import jakarta.transaction.Transactional;
+
 @Service
 public class customer_implementation implements customer_service {
 	
@@ -16,8 +20,10 @@ public class customer_implementation implements customer_service {
 	private customer_repository customer_repo;
 	@Override
 	public customer_m saveLogin(customer_m login) {
-		
-		return customer_repo.save(login);
+		customer_m temp =  customer_repo.save(login);
+		customer_m temp_temp = customer_repo.getReferenceById(temp.getId());
+		System.out.println(temp_temp.getAcc_no());
+		return temp_temp;
 	}
 	@Override
 	public List<customer_m> getAllLogin() {

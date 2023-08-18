@@ -93,11 +93,7 @@
     <version>4.13.1</version>
     <scope>test</scope>
 </dependency>
-		<dependency>
-			<groupId>com.javatechie</groupId>
-			<artifactId>spring-security-jwt-example</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+		
 	</dependencies>
 
 	<build>
