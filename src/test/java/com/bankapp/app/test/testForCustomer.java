@@ -30,11 +30,12 @@ import com.bankapp.app.controller.customer_controller;
 import com.bankapp.app.model.customer_m;
 import com.bankapp.app.repository.customer_repository;
 import com.bankapp.app.service.customer_implementation;
+import com.bankapp.app.util.JwtUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @ExtendWith(SpringExtension.class)
 @WebMvcTest(controllers = customer_controller.class )
-
+@AutoConfigureMockMvc(addFilters = false)
 @ActiveProfiles("test")
 class testForCustomer {
 	
@@ -45,6 +46,9 @@ class testForCustomer {
 	
 	@MockBean
 	private customer_implementation customer_service_provider;
+	
+	@MockBean
+	JwtUtil jwtUtil;
 	
 	@BeforeEach
 	public void init() {
@@ -62,7 +66,8 @@ class testForCustomer {
 				"employee",
 				"self",
 				"100",
-				100);
+				100,
+				0);
 		 when(customer_service_provider.getById(5)).thenReturn(Optional.of(customer));
 	}
 
@@ -74,6 +79,7 @@ class testForCustomer {
 	                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
 	                .andExpect(status().isOk())
 	                .andExpect(jsonPath("$.id", is(5)))
+	                .andExpect(jsonPath("$.acc_no", is(303)))
 	                .andExpect(jsonPath("$.name", is("Chinmoi")))
 	                .andExpect(jsonPath("$.father_name", is("Chinmoi's Father")))
 	                .andExpect(jsonPath("$.mobile", is("1234567891")))
@@ -84,7 +90,8 @@ class testForCustomer {
 	                .andExpect(jsonPath("$.occ_type", is("employee")))
 	                .andExpect(jsonPath("$.source_income", is("self")))
 	                .andExpect(jsonPath("$.gross_annual_income", is("100")))
-	                .andExpect(jsonPath("$.balance", is(100)));
+	                .andExpect(jsonPath("$.balance", is(100)))
+	                .andExpect(jsonPath("$.account_status", is(0)));
 	
 	        verify(customer_service_provider, times(1)).getById(5);
 	    }

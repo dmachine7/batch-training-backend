@@ -2,6 +2,7 @@ package com.bankapp.app.controller;
 
 import java.util.List;
 
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,8 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bankapp.app.exception.ResourceNotFoundException;
+import com.bankapp.app.model.account_m;
 import com.bankapp.app.model.customer_m;
 import com.bankapp.app.service.customer_implementation;
+
+import jakarta.transaction.Transactional;
 
 @RestController
 @RequestMapping("/api/customer")
@@ -53,11 +57,11 @@ public class customer_controller {
 	//post mappings start
 	@PostMapping("/sendData")
 	public String getData(@Validated @RequestBody customer_m log_user){
-		customer_m temp = customer_service_provider.saveLogin(log_user);
-		System.out.println(temp.getAcc_no());
-		customer_m new_temp = customer_service_provider.getById(temp.getId()).orElseThrow();
-		System.out.println(new_temp.getBalance());
-		return "Added Successfully " + "and your account number is" + new_temp.getAcc_no();		
+		customer_service_provider.saveLogin(log_user);
+		
+		
+		ResponseEntity<customer_m> temp_customer = getCustomerAcc(log_user.getId());
+		return "Added Successfully " + "and your account number is" + temp_customer.getBody().getAcc_no();		
 	}
 	//post mappings end
 	//update/put mappings start

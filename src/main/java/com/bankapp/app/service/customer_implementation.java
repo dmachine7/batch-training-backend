@@ -21,9 +21,7 @@ public class customer_implementation implements customer_service {
 	@Override
 	public customer_m saveLogin(customer_m login) {
 		customer_m temp =  customer_repo.save(login);
-		customer_m temp_temp = customer_repo.getReferenceById(temp.getId());
-		System.out.println(temp_temp.getAcc_no());
-		return temp_temp;
+		return temp;
 	}
 	@Override
 	public List<customer_m> getAllLogin() {
