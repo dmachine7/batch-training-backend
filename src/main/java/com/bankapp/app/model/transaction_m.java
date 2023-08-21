@@ -16,9 +16,8 @@ import jakarta.validation.constraints.NotEmpty;
 @Table(name = "tbl_transaction")
 public class transaction_m {
 	@Id
-	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
+	@GeneratedValue(strategy =  GenerationType.AUTO)
 	@Column(name = "trans_id",nullable = false)
-	@NotEmpty(message = "The transaction id can't be Empty")
 	private int trans_id;
 	
 	@Column(name = "send_acc",nullable = false)

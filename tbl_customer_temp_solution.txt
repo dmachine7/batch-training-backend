@@ -1,7 +1,8 @@
 [
     {
         "id": 1,
-        "title": "Mr",
+        "acc_no": 1001,
+         title": "Mr",
         "name": "singh",
         "father_name": "rahul",
         "mobile": "1234567890",
@@ -12,10 +13,13 @@
         "res_address": "qsw",
         "occ_type": "employee",
         "source_income": "self",
-        "gross_annual_income": "100"
+        "gross_annual_income": "100",
+        "account_status": 0
+        
     },
     {
         "id": 2,
+        "acc_no":1002,
         "title": "Mr",
         "name": "atul",
         "father_name": "atul",
@@ -28,5 +32,6 @@
         "occ_type": "employee",
         "source_income": "self",
         "gross_annual_income": "100"
+        "account_status":0
     }
 ]

@@ -4,6 +4,7 @@ import java.util.List;
 
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bankapp.app.exception.ResourceNotFoundException;
@@ -23,10 +25,31 @@ import com.bankapp.app.service.customer_implementation;
 
 import jakarta.transaction.Transactional;
 
+
+
 @RestController
 @RequestMapping("/api/customer")
 @CrossOrigin("http://localhost:3000/")
 public class customer_controller {
+	
+	public class custom_response {
+		private customer_m customer_data;
+		private String response;
+		public customer_m getCustomer_data() {
+			return customer_data;
+		}
+		public void setCustomer_data(customer_m customer_data) {
+			this.customer_data = customer_data;
+		}
+		public String getResponse() {
+			return response;
+		}
+		public void setResponse(String response) {
+			this.response = response;
+		}
+		
+		
+	}
 	@Autowired
 	private customer_implementation customer_service_provider;
 	//get mappings start
@@ -56,12 +79,13 @@ public class customer_controller {
 	//get mappings end
 	//post mappings start
 	@PostMapping("/sendData")
-	public String getData(@Validated @RequestBody customer_m log_user){
+	@ResponseStatus(HttpStatus.CREATED)
+	public ResponseEntity<custom_response> getData(@Validated @RequestBody customer_m log_user){
 		customer_service_provider.saveLogin(log_user);
-		
-		
-		ResponseEntity<customer_m> temp_customer = getCustomerAcc(log_user.getId());
-		return "Added Successfully " + "and your account number is" + temp_customer.getBody().getAcc_no();		
+		custom_response one = new custom_response();
+		one.setCustomer_data(log_user);
+		one.setResponse("Added Successfully " + "and your account number is" + log_user.getAcc_no());
+		return ResponseEntity.ok(one);		
 	}
 	//post mappings end
 	//update/put mappings start
