@@ -47,6 +47,7 @@ public class transaction_controller {
 		
 		
 	}
+	
 	//get mappings end
 	//post mappings start
 		@PostMapping("/sendData")

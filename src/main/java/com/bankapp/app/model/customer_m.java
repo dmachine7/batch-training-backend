@@ -107,7 +107,7 @@ public class customer_m {
 						String source_income,
 						String gross_annual_income,
 						int balance,
-						int account_balance) {
+						int account_status) {
 
 		this.id = id;
 		this.acc_no = acc_no;

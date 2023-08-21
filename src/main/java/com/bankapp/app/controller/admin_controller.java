@@ -23,7 +23,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/api/admin")
+@RequestMapping("/auth/admin")
 @CrossOrigin("http://localhost:3000/")
 public class admin_controller {
 

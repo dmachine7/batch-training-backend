@@ -293,6 +293,8 @@ class testForCustomer {
 					"100",
 					100,
 					0);
+		 
+		 when(customer_service_provider.saveLogin(any(customer_m.class))).thenReturn(customer);
 
 	 }
 	 
