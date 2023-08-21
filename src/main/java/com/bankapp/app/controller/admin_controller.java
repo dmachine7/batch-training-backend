@@ -1,5 +1,7 @@
 package com.bankapp.app.controller;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,9 @@ import com.bankapp.app.controller.customer_controller.custom_response;
 import com.bankapp.app.exception.ResourceNotFoundException;
 import com.bankapp.app.model.admin_m;
 import com.bankapp.app.service.admin_implementation;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -25,7 +30,7 @@ public class admin_controller {
 	@Autowired
 	private admin_implementation admin_service_provider;
 	
-	public class login_body {
+	public static class login_body {
 		private String username;
 		private String password;
 		public String getUsername() {
@@ -49,11 +54,12 @@ public class admin_controller {
 	}
 	//get mappings end
 	@PostMapping("/login")
-	public ResponseEntity<admin_m> getData(@Validated @RequestBody login_body log_user){
-		admin_m response = admin_service_provider.check_login(log_user.getUsername(), log_user.getPassword())
-				.orElseThrow(
-						()-> new ResourceNotFoundException("user not found for these credentials"));
-		
-		return ResponseEntity.ok(response);		
+	public ResponseEntity<admin_m> getData(HttpServletRequest log_user) throws IOException{
+		ObjectMapper ob_map = new ObjectMapper();
+		byte[] bytes = log_user.getInputStream().readAllBytes();
+		login_body response = ob_map.readValue(bytes, login_body.class);
+		admin_m db_response = admin_service_provider.check_login(response.getUsername(), response.getPassword())
+				.orElseThrow( ()->  new ResourceNotFoundException("user not found for these credentials"));
+		return ResponseEntity.ok(db_response);		
 	}
 }
