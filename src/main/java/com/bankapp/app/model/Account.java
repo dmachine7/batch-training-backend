@@ -16,7 +16,7 @@ import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "tbl_account")
-public class account_m {
+public class Account {
 	@Id
 	@Column(name = "acc_no",nullable = false)
 	private int acc_no;
@@ -41,10 +41,10 @@ public class account_m {
 	@Min(value = 0)
 	private int balance;
 	
-	public account_m() {
+	public Account() {
 		
 	}
-	public account_m(int acc_no, String user_id, int customer_id, String log_pass, String trans_pass,  int balance) {
+	public Account(int acc_no, String user_id, int customer_id, String log_pass, String trans_pass,  int balance) {
 		super();
 		this.acc_no = acc_no;
 		this.user_id = user_id;

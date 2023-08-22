@@ -38,9 +38,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.bankapp.app.controller.customer_controller;
-import com.bankapp.app.model.customer_m;
-import com.bankapp.app.service.customer_implementation;
+import com.bankapp.app.controller.Customer_controller;
+import com.bankapp.app.model.Customer;
+import com.bankapp.app.service.Customer_implementation;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
@@ -58,23 +58,23 @@ class CustomerControllerTest {
     private MockMvc mockMvc;
 	
 	@InjectMocks
-	private customer_controller customerController;
+	private Customer_controller customerController;
 
     @Mock
-    private customer_implementation customer_service_provider;
+    private Customer_implementation customer_service_provider;
     
-    private List<customer_m> customers;
+    private List<Customer> customers;
 	
 	@BeforeEach
 	public void init() {
 		 MockitoAnnotations.openMocks(this);
 	     mockMvc = MockMvcBuilders.standaloneSetup(customerController).build();
-		 customer_m customer1 = new customer_m(1, 303, "Mr.", "atul", "atul's Father", "1234567891", "atul@gmail.com", "123443211234", "2001-01-01",
-				    "abc", "abc", "employee", "self", "100", 100);
-		 customer_m customer2 = new customer_m(2, 303, "Mr.", "devang", "devang's Father", "2345678912", "devang@gmail.com", "023443211234", "2001-01-02",
-					"def", "dec", "employee", "self", "1000", 1000);
-		 customer_m customer3 = new customer_m(4, 303, "Mr.", "sahil", "sahil's Father", "3456789123", "sahil@gmail.com", "013443211234", "2001-01-04",
-					"ghi", "ghk", "employee", "self", "200", 2000);
+		 Customer customer1 = new Customer(1, 303, "Mr.", "atul", "atul's Father", "1234567891", "atul@gmail.com", "123443211234", "2001-01-01",
+				    "abc", "abc", "employee", "self", 100, 0);
+		 Customer customer2 = new Customer(2, 303, "Mr.", "devang", "devang's Father", "2345678912", "devang@gmail.com", "023443211234", "2001-01-02",
+					"def", "dec", "employee", "self", 1000, 0);
+		 Customer customer3 = new Customer(4, 303, "Mr.", "sahil", "sahil's Father", "3456789123", "sahil@gmail.com", "013443211234", "2001-01-04",
+					"ghi", "ghk", "employee", "self", 2000, 0);
 		 
 		 customers = Arrays.asList(customer1, customer2, customer3);
 	}
@@ -117,8 +117,7 @@ class CustomerControllerTest {
                 .andExpect(jsonPath("$.per_address", is("ghi")))
                 .andExpect(jsonPath("$.res_address", is("ghk")))
                 .andExpect(jsonPath("$.occ_type", is("employee")))
-                .andExpect(jsonPath("$.source_income", is("self")))
-                .andExpect(jsonPath("$.gross_annual_income", is("200")))
+                .andExpect(jsonPath("$.gross_annual_income", is("self")))
                 .andExpect(jsonPath("$.balance", is(2000)));
 
         verify(customer_service_provider, times(1)).getById(4);
@@ -126,10 +125,10 @@ class CustomerControllerTest {
 	
 	@Test
 	public void createCustomerTest() throws Exception {  		
-		customer_m newCustomer = new customer_m(5, 411, "Mr.", "rahul", "rahul's Father", "4567891234", "rahul@gmail.com", "000043211234", "2001-01-05",
-			    "pqr", "pqrs", "employee", "self", "10000", 200);
+		Customer newCustomer = new Customer(5, 411, "Mr.", "rahul", "rahul's Father", "4567891234", "rahul@gmail.com", "000043211234", "2001-01-05",
+			    "pqr", "pqrs", "employee", "self", 200, 0);
         when(customer_service_provider.getById(anyInt())).thenReturn(Optional.of(newCustomer));
-        when(customer_service_provider.saveLogin(any(customer_m.class))).thenReturn(newCustomer);
+        when(customer_service_provider.saveLogin(any(Customer.class))).thenReturn(newCustomer);
         
         mockMvc.perform(post("/api/customer/sendData")
                 .contentType(MediaType.APPLICATION_JSON)
@@ -145,7 +144,7 @@ class CustomerControllerTest {
                 .andExpect(jsonPath("$.per_address", is(newCustomer.getPer_address())))
                 .andExpect(jsonPath("$.res_address", is(newCustomer.getRes_address())))
                 .andExpect(jsonPath("$.occ_type", is(newCustomer.getOcc_type())))
-                .andExpect(jsonPath("$.source_income", is(newCustomer.getSource_income())))
+                .andExpect(jsonPath("$.account_status", is(newCustomer.getAccount_status())))
                 .andExpect(jsonPath("$.gross_annual_income", is(newCustomer.getGross_annual_income())))
                 .andExpect(jsonPath("$.balance", is(newCustomer.getBalance())));
         
@@ -156,8 +155,8 @@ class CustomerControllerTest {
 
 	    @Test
 	    public void updateCustomerTest() throws Exception {
-	        customer_m updatedCustomer = new customer_m(3, 304, "Mr.", "rahul", "rahul's Father", "4567891234", "rahul@gmail.com", "000043211234", "2001-01-05",
-				    "pqr", "pqrs", "employee", "self", "10000", 200);
+	        Customer updatedCustomer = new Customer(3, 304, "Mr.", "rahul", "rahul's Father", "4567891234", "rahul@gmail.com", "000043211234", "2001-01-05",
+				    "pqr", "pqrs", "employee", "self", 200, 0);
 	        
 	        when(customer_service_provider.getById(anyInt())).thenReturn(Optional.of(updatedCustomer));
 	        when(customer_service_provider.saveLogin(any())).thenReturn(updatedCustomer);
@@ -174,7 +173,7 @@ class CustomerControllerTest {
 	                .andExpect(jsonPath("$.per_address", is(updatedCustomer.getPer_address())))
 	                .andExpect(jsonPath("$.res_address", is(updatedCustomer.getRes_address())))
 	                .andExpect(jsonPath("$.occ_type", is(updatedCustomer.getOcc_type())))
-	                .andExpect(jsonPath("$.source_income", is(updatedCustomer.getSource_income())))
+	                .andExpect(jsonPath("$.account_status", is(updatedCustomer.getAccount_status())))
 	                .andExpect(jsonPath("$.gross_annual_income", is(updatedCustomer.getGross_annual_income())))
 	                .andExpect(jsonPath("$.balance", is(updatedCustomer.getBalance())));
 	        
@@ -186,8 +185,8 @@ class CustomerControllerTest {
 
 	    @Test
 	    public void deleteCustomerTest() throws Exception {
-	    	customer_m customerToRemove =  new customer_m(4, 303, "Mr.", "sahil", "sahil's Father", "3456789123", "sahil@gmail.com", "013443211234", "2001-01-04",
-					"ghi", "ghk", "employee", "self", "200", 2000);
+	    	Customer customerToRemove =  new Customer(4, 303, "Mr.", "sahil", "sahil's Father", "3456789123", "sahil@gmail.com", "013443211234", "2001-01-04",
+					"ghi", "ghk", "employee", "self",2000, 0);
 	    	when(customer_service_provider.getById(anyInt())).thenReturn(Optional.of(customerToRemove));
 	        mockMvc.perform(delete("/api/customer/remove/1"))
 	                .andExpect(status().isOk());

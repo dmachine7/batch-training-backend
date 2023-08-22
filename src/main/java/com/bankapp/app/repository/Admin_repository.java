@@ -6,11 +6,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import com.bankapp.app.model.admin_m;
-import com.bankapp.app.model.customer_m;
+import com.bankapp.app.model.Admin;
+import com.bankapp.app.model.Customer;
 
 @Repository
-public interface admin_repository extends JpaRepository<admin_m,Integer>{
+public interface Admin_repository extends JpaRepository<Admin,Integer>{
 		@Query(value = "select * from tbl_admin t where t.log_user = ?1 and t.log_pass = ?2", nativeQuery = true)
-		public Optional<admin_m> check_login(String username, String password);
+		public Optional<Admin> check_login(String username, String password);
 }

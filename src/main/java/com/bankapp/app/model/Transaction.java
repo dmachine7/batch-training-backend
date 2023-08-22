@@ -14,7 +14,7 @@ import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "tbl_transaction")
-public class transaction_m {
+public class Transaction {
 	@Id
 	@GeneratedValue(strategy =  GenerationType.AUTO)
 	@Column(name = "trans_id",nullable = false)
@@ -50,11 +50,11 @@ public class transaction_m {
 	@Column(name = "maturity_ins")
 	private String maturity_ins;
 	
-	public transaction_m() {
+	public Transaction() {
         // Default constructor
     }
 	
-	public transaction_m(int trans_id, String send_acc, String rec_acc, String trans_type, String trans_pass, Date date, long amount, String remarks, String maturity_ins) {
+	public Transaction(int trans_id, String send_acc, String rec_acc, String trans_type, String trans_pass, Date date, long amount, String remarks, String maturity_ins) {
 		super();
 		this.trans_id = trans_id;
 		this.send_acc = send_acc;

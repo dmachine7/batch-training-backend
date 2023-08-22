@@ -28,9 +28,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.bankapp.app.controller.account_controller;
-import com.bankapp.app.model.account_m;
-import com.bankapp.app.service.account_implementation;
+import com.bankapp.app.controller.Account_controller;
+import com.bankapp.app.model.Account;
+import com.bankapp.app.service.Account_implementation;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
@@ -40,10 +40,10 @@ public class AccountControllerTest {
     private MockMvc mockMvc;
 
     @InjectMocks
-    private account_controller accountController;
+    private Account_controller accountController;
 
     @Mock
-    private account_implementation accountServiceProvider;
+    private Account_implementation accountServiceProvider;
 
     @BeforeEach
     public void setup() {
@@ -53,10 +53,10 @@ public class AccountControllerTest {
 
     @Test
     public void getAllAccountsTest() throws Exception {
-    	account_m account1 = new account_m(1000, "atul", 155, "at", "atul123", 1000);
-    	account_m account2 = new account_m(1000, "devang", 155, "dev", "dev123", 1000);
-    	account_m account3 = new account_m(1000, "sahil", 155, "sah", "123", 1000);
-        List<account_m> accounts = Arrays.asList(account1, account2, account3);
+    	Account account1 = new Account(1000, "atul", 155, "at", "atul123", 1000);
+    	Account account2 = new Account(1000, "devang", 155, "dev", "dev123", 1000);
+    	Account account3 = new Account(1000, "sahil", 155, "sah", "123", 1000);
+        List<Account> accounts = Arrays.asList(account1, account2, account3);
 
         when(accountServiceProvider.getAllLogin()).thenReturn(accounts);
 
@@ -75,7 +75,7 @@ public class AccountControllerTest {
 
     @Test
     public void getAccountByIdTest() throws Exception {
-        account_m account = new account_m(1000, "rahul", 155, "rah", "rah123", 1000);
+        Account account = new Account(1000, "rahul", 155, "rah", "rah123", 1000);
         int accountId = 1;
 
         when(accountServiceProvider.getById(accountId)).thenReturn(Optional.of(account));
@@ -94,7 +94,7 @@ public class AccountControllerTest {
 
     @Test
     public void createAccountTest() throws Exception {
-        account_m newAccount = new account_m(10000, "rohan", 155, "roh", "rohan123", 1000);
+        Account newAccount = new Account(10000, "rohan", 155, "roh", "rohan123", 1000);
         
         mockMvc.perform(post("/api/account/sendData")
                .contentType(MediaType.APPLICATION_JSON)
@@ -112,8 +112,8 @@ public class AccountControllerTest {
 
     @Test
     public void updateAccountTest() throws Exception {
-        account_m existingAccount = new account_m(1000, "atul", 155, "at", "atul123", 1000);
-        account_m updatedAccount = new account_m(1000, "atul", 156, "atul", "atul1234", 1000);
+        Account existingAccount = new Account(1000, "atul", 155, "at", "atul123", 1000);
+        Account updatedAccount = new Account(1000, "atul", 156, "atul", "atul1234", 1000);
         int accountId = 1;
 
         when(accountServiceProvider.getById(accountId)).thenReturn(Optional.of(existingAccount));
@@ -135,7 +135,7 @@ public class AccountControllerTest {
 
     @Test
     public void deleteAccountTest() throws Exception {
-        account_m existingAccount = new account_m(1000, "atul", 155, "at", "atul123", 1000);
+        Account existingAccount = new Account(1000, "atul", 155, "at", "atul123", 1000);
         int accountId = 1;
 
         when(accountServiceProvider.getById(accountId)).thenReturn(Optional.of(existingAccount));

@@ -6,32 +6,32 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bankapp.app.model.account_m;
-import com.bankapp.app.repository.account_repository;
+import com.bankapp.app.model.Account;
+import com.bankapp.app.repository.Account_repository;
 
 @Service
-public class account_implementation implements account_service{
+public class Account_implementation implements Account_service{
 	
 	@Autowired
-	private account_repository account_repo;
+	private Account_repository account_repo;
 
 	@Override
-	public account_m saveLogin(account_m login) {
+	public Account saveLogin(Account login) {
 		return account_repo.save(login);
 	}
 
 	@Override
-	public List<account_m> getAllLogin() {
+	public List<Account> getAllLogin() {
 		return account_repo.findAll();
 	}
 
 	@Override
-	public Optional<account_m> getById(int id) {
+	public Optional<Account> getById(int id) {
 		return account_repo.findById(id);
 	}
 
 	@Override
-	public void remove_user(account_m account) {
+	public void remove_user(Account account) {
 		account_repo.delete(account);
 		
 	}

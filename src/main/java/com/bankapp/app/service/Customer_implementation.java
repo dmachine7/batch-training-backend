@@ -6,38 +6,38 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.bankapp.app.model.customer_m;
-import com.bankapp.app.repository.customer_repository;
+import com.bankapp.app.model.Customer;
+import com.bankapp.app.repository.Customer_repository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 import jakarta.transaction.Transactional;
 
 @Service
-public class customer_implementation implements customer_service {
+public class Customer_implementation implements Customer_service {
 	
 	@Autowired
-	private customer_repository customer_repo;
+	private Customer_repository customer_repo;
 	@Override
-	public customer_m saveLogin(customer_m login) {
-		customer_m temp =  customer_repo.save(login);
+	public Customer saveLogin(Customer login) {
+		Customer temp =  customer_repo.save(login);
 		return temp;
 	}
 	@Override
-	public List<customer_m> getAllLogin() {
+	public List<Customer> getAllLogin() {
 		
 		return customer_repo.findAll();
 	}
 	@Override
-	public Optional<customer_m> getById(int id) {
+	public Optional<Customer> getById(int id) {
 		
 		return customer_repo.findById(id);
 	}
 	@Override
-	public void remove_user(customer_m to_be_deleted) {
+	public void remove_user(Customer to_be_deleted) {
 		customer_repo.delete(to_be_deleted);
 	}
-	public Optional<customer_m > getCustomerAcc(int id) {
+	public Optional<Customer > getCustomerAcc(int id) {
 		return customer_repo.getCustomerAcc(id);
 	}
 
