@@ -26,8 +26,8 @@ public class account_m {
 	@NotBlank 
 	private String user_id;
 	
-//	@Column(name = "customer_id",nullable = false)
-//	private int customer_id;
+	@Column(name = "customer_id")
+	private int customer_id;
 	
 	@Column(name = "log_pass",nullable = false)
 	@NotEmpty(message = "The login password can't be Empty")
@@ -40,18 +40,19 @@ public class account_m {
 	@Column(name = "balance",nullable = false)
 	private int balance;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="customer_id")
-	private customer_m customer;
+
 	public int getBalance() {
 		return balance;
 	}
-	public void setCustomer(customer_m customer) {
-		this.customer = customer;
+	
+	public int getCustomer_id() {
+		return customer_id;
 	}
-	public customer_m getCustomer() {
-		return this.customer;
+
+	public void setCustomer_id(int customer_id) {
+		this.customer_id = customer_id;
 	}
+
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}

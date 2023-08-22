@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
@@ -76,7 +77,8 @@ public class customer_m {
 	private int account_status;
 	
 
-	@OneToMany(mappedBy = "customer", cascade = {CascadeType.DETACH, CascadeType.REFRESH})
+	@OneToMany(cascade = {CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name = "customer_id")
 	private Set<account_m>account_mm;
 	
 	
