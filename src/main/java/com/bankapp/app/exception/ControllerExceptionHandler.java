@@ -18,6 +18,7 @@ public class ControllerExceptionHandler {
 		
 		return new ResponseEntity<Exception_m>(message,HttpStatus.NOT_FOUND);	
 	}
+	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<Exception_m> globalExceptionHandler(Exception ex,
 			WebRequest request){

@@ -47,12 +47,14 @@ public class transaction_controller {
 		
 		
 	}
+	
 	//get mappings end
 	//post mappings start
 		@PostMapping("/sendData")
 		public String getData(@Validated @RequestBody transaction_m transaction){
 			transaction_service_provider.saveLogin(transaction);
 			return "Added Successfully";		
+			
 	}
 	//post mappings end
 	//update/put mappings start
