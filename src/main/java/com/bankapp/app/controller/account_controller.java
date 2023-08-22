@@ -42,9 +42,9 @@ public class account_controller {
 	//get mappings end
 	//post mappings start
 	@PostMapping("/sendData")
-	public String getData(@Validated @RequestBody account_m log_user){
+	public ResponseEntity<account_m> getData(@Validated @RequestBody account_m log_user){
 		account_service_provider.saveLogin(log_user);
-		return "Added Successfully";		
+		return ResponseEntity.ok(log_user);		
 	}
 	//post mappings end
 	//update/put mappings start
