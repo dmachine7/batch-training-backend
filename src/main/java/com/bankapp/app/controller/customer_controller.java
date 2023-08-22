@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.bankapp.app.exception.ControllerExceptionHandler;
+import com.bankapp.app.exception.Exception_m;
 import com.bankapp.app.exception.ResourceNotFoundException;
 import com.bankapp.app.model.account_m;
 import com.bankapp.app.model.customer_m;
@@ -82,10 +84,12 @@ public class customer_controller {
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<custom_response> getData(@Validated @RequestBody customer_m log_user){
 
-			customer_service_provider.saveLogin(log_user);
 		custom_response one = new custom_response();
-		one.setCustomer_data(log_user);
-		one.setResponse("Added Successfully " + "and your account number is" + log_user.getAcc_no());
+		//try {
+			customer_service_provider.saveLogin(log_user);
+			one.setCustomer_data(log_user);
+			one.setResponse("Added Successfully " + "and your account number is" + log_user.getAcc_no());
+		
 		return ResponseEntity.ok(one);	
 		
 	}
