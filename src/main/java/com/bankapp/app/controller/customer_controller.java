@@ -81,18 +81,14 @@ public class customer_controller {
 	//get mappings end
 	//post mappings start
 	@PostMapping("/sendData")
-	@ResponseStatus(HttpStatus.CREATED)
-	public ResponseEntity<custom_response> getData(@Validated @RequestBody customer_m log_user){
-
-		custom_response one = new custom_response();
-		//try {
-			customer_service_provider.saveLogin(log_user);
-			one.setCustomer_data(log_user);
-			one.setResponse("Added Successfully " + "and your account number is" + log_user.getAcc_no());
-		
-		return ResponseEntity.ok(one);	
-		
+	public ResponseEntity<customer_m > getData(@Validated @RequestBody customer_m log_user){
+		customer_m temp = customer_service_provider.saveLogin(log_user);
+		System.out.println(temp.getAcc_no());
+		customer_m new_temp = customer_service_provider.getById(temp.getId()).orElseThrow();
+		System.out.println(new_temp.getBalance());
+		return ResponseEntity.ok(temp);	
 	}
+  
 	//post mappings end
 	//update/put mappings start
 	@PutMapping("/update/{id}")
