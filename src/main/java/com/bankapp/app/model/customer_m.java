@@ -67,10 +67,6 @@ public class customer_m {
 	@Column(name = "occ_type",nullable = false)
 	private String occ_type;
 	
-	@Column(name = "source_income",nullable = false)
-	@NotEmpty(message = "source_income field can't be empty.")
-	private String source_income;
-	
 	@Column(name = "gross_annual_income",nullable = false)
 	@NotEmpty(message = "gross_annual_income field can't be empty.")
 	private String gross_annual_income;
@@ -104,7 +100,6 @@ public class customer_m {
 						String per_address, 
 						String res_address,
 						String occ_type,
-						String source_income,
 						String gross_annual_income,
 						int balance,
 						int account_status) {
@@ -121,7 +116,6 @@ public class customer_m {
 		this.per_address = per_address;
 		this.res_address = res_address;
 		this.occ_type = occ_type;
-		this.source_income = source_income;
 		this.gross_annual_income = gross_annual_income;
 		this.balance = balance;
 		this.account_status = account_status;
@@ -206,12 +200,6 @@ public class customer_m {
 	}
 	public void setOcc_type(String occ_type) {
 		this.occ_type = occ_type;
-	}
-	public String getSource_income() {
-		return source_income;
-	}
-	public void setSource_income(String source_income) {
-		this.source_income = source_income;
 	}
 	public String getGross_annual_income() {
 		return gross_annual_income;

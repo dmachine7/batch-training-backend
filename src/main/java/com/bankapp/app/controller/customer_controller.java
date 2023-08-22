@@ -81,11 +81,13 @@ public class customer_controller {
 	@PostMapping("/sendData")
 	@ResponseStatus(HttpStatus.CREATED)
 	public ResponseEntity<custom_response> getData(@Validated @RequestBody customer_m log_user){
-		customer_service_provider.saveLogin(log_user);
+
+			customer_service_provider.saveLogin(log_user);
 		custom_response one = new custom_response();
 		one.setCustomer_data(log_user);
 		one.setResponse("Added Successfully " + "and your account number is" + log_user.getAcc_no());
-		return ResponseEntity.ok(one);		
+		return ResponseEntity.ok(one);	
+		
 	}
 	//post mappings end
 	//update/put mappings start
@@ -104,7 +106,6 @@ public class customer_controller {
 		find_user.setPer_address(user_details.getPer_address());
 		find_user.setRes_address(user_details.getRes_address());
 		find_user.setOcc_type(user_details.getOcc_type());
-		find_user.setSource_income(user_details.getSource_income());
 		find_user.setGross_annual_income(user_details.getGross_annual_income());
 		find_user.setBalance(user_details.getBalance());
 		find_user.setAccount_status(user_details.getAccount_status());
