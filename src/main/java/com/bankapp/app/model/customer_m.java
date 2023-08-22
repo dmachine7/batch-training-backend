@@ -1,19 +1,19 @@
 package com.bankapp.app.model;
 
-import java.util.Date;
+import java.util.Set;
 
-import org.hibernate.annotations.Generated;
-import org.hibernate.annotations.GenerationTime;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 
@@ -25,8 +25,7 @@ public class customer_m {
 	@Column(name = "id",nullable = false)
 	private int id;
 
-	@GeneratedValue(strategy =  GenerationType.IDENTITY)
-	@Column(name = "acc_no", insertable = false)
+	@Column(name = "acc_no", nullable = false)
 	private int acc_no ;
 	
 	@Column(name = "title",nullable = false)
@@ -69,16 +68,26 @@ public class customer_m {
 	@Column(name = "occ_type",nullable = false)
 	private String occ_type;
 	
-	@Column(name = "source_income",nullable = false)
-	@NotEmpty(message = "source_income field can't be empty.")
-	private String source_income;
-	
 	@Column(name = "gross_annual_income",nullable = false)
 	@NotEmpty(message = "gross_annual_income field can't be empty.")
 	private String gross_annual_income;
 	@Column(name = "balance", nullable = false)
 	private int balance;
+	@Column(name = "account_status", nullable = false)
+	private int account_status;
 	
+
+	@OneToMany(cascade = {CascadeType.DETACH, CascadeType.REFRESH})
+	@JoinColumn(name = "customer_id")
+	private Set<account_m>account_mm;
+	
+	
+	public Set<account_m> getAccount_m() {
+		return account_mm;
+	}
+	public void setAccount_m(Set<account_m> account_mm) {
+		this.account_mm= account_mm;
+	}
 	public customer_m() {}
 	public customer_m
 	( int id, 
@@ -93,9 +102,9 @@ public class customer_m {
 						String per_address, 
 						String res_address,
 						String occ_type,
-						String source_income,
 						String gross_annual_income,
-						int balance) {
+						int balance,
+						int account_status) {
 
 		this.id = id;
 		this.acc_no = acc_no;
@@ -109,11 +118,18 @@ public class customer_m {
 		this.per_address = per_address;
 		this.res_address = res_address;
 		this.occ_type = occ_type;
-		this.source_income = source_income;
 		this.gross_annual_income = gross_annual_income;
 		this.balance = balance;
+		this.account_status = account_status;
 	}
 
+	public int getAccount_status() {
+		return account_status;
+	}
+	public void setAccount_status(int account_status) {
+		this.account_status = account_status;
+	}
+	
 	public int getBalance() {
 		return balance;
 	}
@@ -186,12 +202,6 @@ public class customer_m {
 	}
 	public void setOcc_type(String occ_type) {
 		this.occ_type = occ_type;
-	}
-	public String getSource_income() {
-		return source_income;
-	}
-	public void setSource_income(String source_income) {
-		this.source_income = source_income;
 	}
 	public String getGross_annual_income() {
 		return gross_annual_income;

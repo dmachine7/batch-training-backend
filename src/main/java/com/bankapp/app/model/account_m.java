@@ -2,9 +2,12 @@ package com.bankapp.app.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -24,7 +27,7 @@ public class account_m {
 	@NotBlank 
 	private String user_id;
 	
-	@Column(name = "customer_id",nullable = false)
+	@Column(name = "customer_id")
 	private int customer_id;
 	
 	@Column(name = "log_pass",nullable = false)
@@ -51,9 +54,19 @@ public class account_m {
 		this.trans_pass = trans_pass;
 		this.balance = balance;
 	}
+
 	public int getBalance() {
 		return balance;
 	}
+	
+	public int getCustomer_id() {
+		return customer_id;
+	}
+
+	public void setCustomer_id(int customer_id) {
+		this.customer_id = customer_id;
+	}
+
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
@@ -69,12 +82,8 @@ public class account_m {
 	public void setUser_id(String user_id) {
 		this.user_id = user_id;
 	}
-	public int getCustomer_id() {
-		return customer_id;
-	}
-	public void setCustomer_id(int customer_id) {
-		this.customer_id = customer_id;
-	}
+	
+	
 	public String getLog_pass() {
 		return log_pass;
 	}

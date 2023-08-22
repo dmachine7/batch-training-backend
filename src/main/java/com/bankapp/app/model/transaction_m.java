@@ -16,7 +16,7 @@ import jakarta.validation.constraints.NotEmpty;
 @Table(name = "tbl_transaction")
 public class transaction_m {
 	@Id
-	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
+	@GeneratedValue(strategy =  GenerationType.AUTO)
 	@Column(name = "trans_id",nullable = false)
 	private int trans_id;
 	
@@ -28,8 +28,10 @@ public class transaction_m {
 	@NotEmpty(message = "The sender's account number can't be Empty")
 	private String rec_acc;
 	
-	@Column(name = "trans_type",nullable = false)
+	@Column(name = "trans_type")
 	private String trans_type;
+	@Column(name = "payment_type")
+	private String payment_type;
 	
 	@Column(name = "trans_pass",nullable = false)
 	@NotEmpty(message = "The transaction password can't be Empty")
