@@ -17,7 +17,6 @@ import jakarta.validation.constraints.NotEmpty;
 @Table(name = "tbl_account")
 public class account_m {
 	@Id
-	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
 	@Column(name = "acc_no",nullable = false)
 	private int acc_no;
 	
