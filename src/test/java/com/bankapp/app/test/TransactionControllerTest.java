@@ -30,10 +30,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.bankapp.app.controller.transaction_controller;
-import com.bankapp.app.model.customer_m;
-import com.bankapp.app.model.transaction_m;
-import com.bankapp.app.service.transaction_implementation;
+import com.bankapp.app.controller.Transaction_controller;
+import com.bankapp.app.model.Customer;
+import com.bankapp.app.model.Transaction;
+import com.bankapp.app.service.Transaction_implementation;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -42,10 +42,10 @@ public class TransactionControllerTest {
     private MockMvc mockMvc;
 
     @InjectMocks
-    private transaction_controller transactionController;
+    private Transaction_controller transactionController;
 
     @Mock
-    private transaction_implementation transactionServiceProvider;
+    private Transaction_implementation transactionServiceProvider;
 
     @BeforeEach
     public void setup() {
@@ -55,10 +55,10 @@ public class TransactionControllerTest {
 
     @Test
     public void getAllTransactionsTest() throws Exception {
-    	transaction_m transaction1 = new transaction_m(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
-    	transaction_m transaction2 = new transaction_m(2, "1234567590", "98765432101", "Transfer", "myPassword123", new Date(), 10000L, "Payment for services", "2023-12-31");
-    	transaction_m transaction3 = new transaction_m(3, "1234567690", "9666543210", "Transfer", "myPassword123", new Date(), 2000L, "Payment for services", "2023-12-31");
-        List<transaction_m> transactions = Arrays.asList(transaction1 ,transaction2, transaction3);
+    	Transaction transaction1 = new Transaction(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
+    	Transaction transaction2 = new Transaction(2, "1234567590", "98765432101", "Transfer", "myPassword123", new Date(), 10000L, "Payment for services", "2023-12-31");
+    	Transaction transaction3 = new Transaction(3, "1234567690", "9666543210", "Transfer", "myPassword123", new Date(), 2000L, "Payment for services", "2023-12-31");
+        List<Transaction> transactions = Arrays.asList(transaction1 ,transaction2, transaction3);
            
         when(transactionServiceProvider.getAllLogin()).thenReturn(transactions);
         //int trans_id, String send_acc, String rec_acc, String trans_type, String trans_pass, Date date, long amount, String remarks, String maturity_ins
@@ -78,10 +78,10 @@ public class TransactionControllerTest {
 
     @Test
     public void getTransactionsByAccountIdTest() throws Exception {
-    	transaction_m transaction1 = new transaction_m(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
-    	transaction_m transaction2 = new transaction_m(2, "1234567591", "98765432101", "Transfer", "myPassword123", new Date(), 10000L, "Payment for services", "2023-12-31");
-    	transaction_m transaction3 = new transaction_m(3, "1234567690", "9666543210", "Transfer", "myPassword123", new Date(), 2000L, "Payment for services", "2023-12-31");
-        List<transaction_m> transactions = Arrays.asList(transaction1 ,transaction2, transaction3);
+    	Transaction transaction1 = new Transaction(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
+    	Transaction transaction2 = new Transaction(2, "1234567591", "98765432101", "Transfer", "myPassword123", new Date(), 10000L, "Payment for services", "2023-12-31");
+    	Transaction transaction3 = new Transaction(3, "1234567690", "9666543210", "Transfer", "myPassword123", new Date(), 2000L, "Payment for services", "2023-12-31");
+        List<Transaction> transactions = Arrays.asList(transaction1 ,transaction2, transaction3);
         int accountId = 1;
 
         when(transactionServiceProvider.getByAcc(accountId)).thenReturn(Optional.of(transactions));
@@ -95,7 +95,7 @@ public class TransactionControllerTest {
 
     @Test
     public void createTransactionTest() throws Exception {
-        transaction_m newTransaction =  new transaction_m(4, "1234567890", "9876543210", "Transfer", "myPassword12345", new Date(), 1000L, "Payment for services", "2023-12-31");
+        Transaction newTransaction =  new Transaction(4, "1234567890", "9876543210", "Transfer", "myPassword12345", new Date(), 1000L, "Payment for services", "2023-12-31");
         
         when(transactionServiceProvider.saveLogin(any())).thenReturn(newTransaction);
         
@@ -118,8 +118,8 @@ public class TransactionControllerTest {
 
     @Test
     public void updateTransactionTest() throws Exception {
-        transaction_m existingTransaction = new transaction_m(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
-        transaction_m updatedTransaction = new transaction_m(5, "1234567890", "9876543210", "Transfer", "myPassword", new Date(), 1050L, "Payment for services", "2023-12-31");
+        Transaction existingTransaction = new Transaction(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
+        Transaction updatedTransaction = new Transaction(5, "1234567890", "9876543210", "Transfer", "myPassword", new Date(), 1050L, "Payment for services", "2023-12-31");
         int transactionId = 1;
         
         when(transactionServiceProvider.getById(transactionId)).thenReturn(Optional.of(existingTransaction));
@@ -145,7 +145,7 @@ public class TransactionControllerTest {
 
     @Test
     public void deleteTransactionTest() throws Exception {
-        transaction_m existingTransaction = new transaction_m(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
+        Transaction existingTransaction = new Transaction(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
         int transactionId = 1;
 
         when(transactionServiceProvider.getById(transactionId)).thenReturn(Optional.of(existingTransaction));

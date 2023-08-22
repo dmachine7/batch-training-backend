@@ -20,27 +20,27 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.bankapp.app.model.account_m;
-import com.bankapp.app.repository.account_repository;
-import com.bankapp.app.service.account_implementation;
+import com.bankapp.app.model.Account;
+import com.bankapp.app.repository.Account_repository;
+import com.bankapp.app.service.Account_implementation;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
 public class AccountServiceTest {
 
     @InjectMocks
-    private account_implementation accountService;
+    private Account_implementation accountService;
 
     @Mock
-    private account_repository accountRepository;
+    private Account_repository accountRepository;
 
     @Test
     public void saveLoginTest() {
-        account_m account = new account_m(1000, "atul", 155, "at", "atul123", 1000);
+        Account account = new Account(1000, "atul", 155, "at", "atul123", 1000);
         
-        when(accountRepository.save(any(account_m.class))).thenReturn(account);
+        when(accountRepository.save(any(Account.class))).thenReturn(account);
         
-        account_m savedAccount = accountService.saveLogin(account);
+        Account savedAccount = accountService.saveLogin(account);
         assertNotNull(savedAccount);
         assertEquals(account.getAcc_no(), savedAccount.getAcc_no()); 
         assertEquals(account.getUser_id(), savedAccount.getUser_id()); 
@@ -53,18 +53,18 @@ public class AccountServiceTest {
 
     @Test
     public void getAllLoginTest() {
-    	account_m account1 = new account_m(1000, "atul", 155, "at", "atul123", 1000);
-    	account_m account2 = new account_m(1000, "devang", 155, "dev", "dev123", 1000);
-    	account_m account3 = new account_m(1000, "sahil", 155, "sah", "123", 1000);
-    	List<account_m> accounts = Arrays.asList(account1, account2, account3);
+    	Account account1 = new Account(1000, "atul", 155, "at", "atul123", 1000);
+    	Account account2 = new Account(1000, "devang", 155, "dev", "dev123", 1000);
+    	Account account3 = new Account(1000, "sahil", 155, "sah", "123", 1000);
+    	List<Account> accounts = Arrays.asList(account1, account2, account3);
     	
         when(accountRepository.findAll()).thenReturn(accounts);
 
-        List<account_m> retrievedAccounts = accountService.getAllLogin();
+        List<Account> retrievedAccounts = accountService.getAllLogin();
         assertEquals(accounts.size(), retrievedAccounts.size());
         for (int i = 0; i < accounts.size(); i++) {
-            account_m expectedAccount = accounts.get(i);
-            account_m retrievedAccount = retrievedAccounts.get(i);
+            Account expectedAccount = accounts.get(i);
+            Account retrievedAccount = retrievedAccounts.get(i);
             assertEquals(expectedAccount.getAcc_no(), retrievedAccount.getAcc_no());
             assertEquals(expectedAccount.getUser_id(), retrievedAccount.getUser_id());
             assertEquals(expectedAccount.getCustomer_id(), retrievedAccount.getCustomer_id());
@@ -79,11 +79,11 @@ public class AccountServiceTest {
     @Test
     public void getByIdTest() {
         int accountId = 1;
-        account_m account = new account_m(1000, "atul", 155, "at", "atul123", 1000);
+        Account account = new Account(1000, "atul", 155, "at", "atul123", 1000);
         
         when(accountRepository.findById(accountId)).thenReturn(Optional.of(account));
 
-        Optional<account_m> retrievedAccount = accountService.getById(accountId);
+        Optional<Account> retrievedAccount = accountService.getById(accountId);
         assertTrue(retrievedAccount.isPresent());
         assertEquals(account.getUser_id(), retrievedAccount.get().getUser_id());
         assertEquals(account.getAcc_no(), retrievedAccount.get().getAcc_no());
@@ -97,7 +97,7 @@ public class AccountServiceTest {
 
     @Test
     public void removeUserTest() {
-        account_m account = new account_m(1000, "atul", 155, "at", "atul123", 1000);
+        Account account = new Account(1000, "atul", 155, "at", "atul123", 1000);
 
         accountService.remove_user(account);
         verify(accountRepository, times(1)).delete(account);

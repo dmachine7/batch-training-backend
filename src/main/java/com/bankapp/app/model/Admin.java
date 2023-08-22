@@ -10,7 +10,7 @@ import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "tbl_admin")
-public class admin_m {
+public class Admin {
 	@Id
 	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
 	@Column(name = "id",nullable = false)

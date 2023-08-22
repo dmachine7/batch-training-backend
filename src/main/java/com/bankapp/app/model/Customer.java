@@ -19,7 +19,7 @@ import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "tbl_customer")
-public class customer_m {
+public class Customer {
 	@Id
 	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
 	@Column(name = "id",nullable = false)
@@ -79,17 +79,17 @@ public class customer_m {
 
 	@OneToMany(cascade = {CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name = "customer_id")
-	private Set<account_m>account_mm;
+	private Set<Account>account_mm;
 	
 	
-	public Set<account_m> getAccount_m() {
+	public Set<Account> getAccount_m() {
 		return account_mm;
 	}
-	public void setAccount_m(Set<account_m> account_mm) {
+	public void setAccount_m(Set<Account> account_mm) {
 		this.account_mm= account_mm;
 	}
-	public customer_m() {}
-	public customer_m
+	public Customer() {}
+	public Customer
 	( int id, 
 						int acc_no,
 						String title,

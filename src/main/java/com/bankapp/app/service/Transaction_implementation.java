@@ -8,35 +8,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bankapp.app.exception.ResourceNotFoundException;
-import com.bankapp.app.model.transaction_m;
-import com.bankapp.app.repository.transaction_repository;
+import com.bankapp.app.model.Transaction;
+import com.bankapp.app.repository.Transaction_repository;
 
 @Service
-public class transaction_implementation implements transaction_service{
+public class Transaction_implementation implements Transaction_service{
 	@Autowired
-	private transaction_repository transaction_repo;
+	private Transaction_repository transaction_repo;
 
 	@Override
-	public transaction_m saveLogin(transaction_m transaction) {
+	public Transaction saveLogin(Transaction transaction) {
 		return transaction_repo.save(transaction);
 	}
 
 	@Override
-	public List<transaction_m> getAllLogin() {
+	public List<Transaction> getAllLogin() {
 		return transaction_repo.findAll();
 	}
 
 	@Override
-	public Optional<transaction_m> getById(int id) {
+	public Optional<Transaction> getById(int id) {
 		return transaction_repo.findById(id);
 	}
 
 	@Override
-	public void remove_user(transaction_m transaction) {
+	public void remove_user(Transaction transaction) {
 		transaction_repo.delete(transaction);
 		
 	}
-	public Optional<List<transaction_m> > getByAcc(int id) {
+	public Optional<List<Transaction> > getByAcc(int id) {
 		return transaction_repo.getAccountTrans(id);
 	}
 

@@ -21,26 +21,26 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.bankapp.app.model.transaction_m;
-import com.bankapp.app.repository.transaction_repository;
-import com.bankapp.app.service.transaction_implementation;
+import com.bankapp.app.model.Transaction;
+import com.bankapp.app.repository.Transaction_repository;
+import com.bankapp.app.service.Transaction_implementation;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
 public class TransactionServiceTest {
 
     @InjectMocks
-    private transaction_implementation transactionService;
+    private Transaction_implementation transactionService;
 
     @Mock
-    private transaction_repository transactionRepository;
+    private Transaction_repository transactionRepository;
 
     @Test
     public void saveLoginTest() {
-        transaction_m transaction = new transaction_m(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
-        when(transactionRepository.save(any(transaction_m.class))).thenReturn(transaction);
+        Transaction transaction = new Transaction(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
+        when(transactionRepository.save(any(Transaction.class))).thenReturn(transaction);
 
-        transaction_m savedTransaction = transactionService.saveLogin(transaction);
+        Transaction savedTransaction = transactionService.saveLogin(transaction);
 
         assertNotNull(savedTransaction);
         assertEquals(transaction.getTrans_id(), savedTransaction.getTrans_id());
@@ -58,20 +58,20 @@ public class TransactionServiceTest {
 
     @Test
     public void getAllLoginTest() {
-        List<transaction_m> transactions = new ArrayList<>();
-        transaction_m transaction1 = new transaction_m(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
-    	transaction_m transaction2 = new transaction_m(2, "1234567590", "98765432101", "Transfer", "myPassword123", new Date(), 10000L, "Payment for services", "2023-12-31");
-    	transaction_m transaction3 = new transaction_m(3, "1234567690", "9666543210", "Transfer", "myPassword123", new Date(), 2000L, "Payment for services", "2023-12-31");
+        List<Transaction> transactions = new ArrayList<>();
+        Transaction transaction1 = new Transaction(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
+    	Transaction transaction2 = new Transaction(2, "1234567590", "98765432101", "Transfer", "myPassword123", new Date(), 10000L, "Payment for services", "2023-12-31");
+    	Transaction transaction3 = new Transaction(3, "1234567690", "9666543210", "Transfer", "myPassword123", new Date(), 2000L, "Payment for services", "2023-12-31");
         transactions = Arrays.asList(transaction1 ,transaction2, transaction3);
         
         when(transactionRepository.findAll()).thenReturn(transactions);
 
-        List<transaction_m> retrievedTransactions = transactionService.getAllLogin();
+        List<Transaction> retrievedTransactions = transactionService.getAllLogin();
 
         assertEquals(transactions.size(), retrievedTransactions.size());
         for (int i = 0; i < transactions.size(); i++) {
-            transaction_m retrievedTransaction = retrievedTransactions.get(i);
-            transaction_m transaction = transactions.get(i);
+            Transaction retrievedTransaction = retrievedTransactions.get(i);
+            Transaction transaction = transactions.get(i);
             assertNotNull(retrievedTransaction);
             assertEquals(transaction.getTrans_id(), retrievedTransaction.getTrans_id());
             assertEquals(transaction.getSend_acc(), retrievedTransaction.getSend_acc());
@@ -89,15 +89,15 @@ public class TransactionServiceTest {
 
     @Test
     public void getByAccTest() {
-    	List<transaction_m> transactions = new ArrayList<>();
-        transaction_m transaction1 = new transaction_m(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
-     	transaction_m transaction2 = new transaction_m(2, "1234567590", "98765432101", "Transfer", "myPassword123", new Date(), 10000L, "Payment for services", "2023-12-31");
-     	transaction_m transaction3 = new transaction_m(3, "1234567690", "9666543210", "Transfer", "myPassword123", new Date(), 2000L, "Payment for services", "2023-12-31");
+    	List<Transaction> transactions = new ArrayList<>();
+        Transaction transaction1 = new Transaction(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
+     	Transaction transaction2 = new Transaction(2, "1234567590", "98765432101", "Transfer", "myPassword123", new Date(), 10000L, "Payment for services", "2023-12-31");
+     	Transaction transaction3 = new Transaction(3, "1234567690", "9666543210", "Transfer", "myPassword123", new Date(), 2000L, "Payment for services", "2023-12-31");
         transactions = Arrays.asList(transaction1 ,transaction2, transaction3);
         int accountId = 1;
         when(transactionRepository.getAccountTrans(accountId)).thenReturn(Optional.of(transactions));
 
-        Optional<List<transaction_m>> retrievedTransactions = transactionService.getByAcc(accountId);
+        Optional<List<Transaction>> retrievedTransactions = transactionService.getByAcc(accountId);
 
         assertTrue(retrievedTransactions.isPresent());
         assertEquals(transactions.size(), retrievedTransactions.get().size());
@@ -107,7 +107,7 @@ public class TransactionServiceTest {
 
     @Test
     public void removeUserTest() {
-        transaction_m transaction = new transaction_m(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
+        Transaction transaction = new Transaction(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
 
         transactionService.remove_user(transaction);
 

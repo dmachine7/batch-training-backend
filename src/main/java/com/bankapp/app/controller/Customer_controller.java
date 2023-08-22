@@ -21,9 +21,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.bankapp.app.exception.ControllerExceptionHandler;
 import com.bankapp.app.exception.Exception_m;
 import com.bankapp.app.exception.ResourceNotFoundException;
-import com.bankapp.app.model.account_m;
-import com.bankapp.app.model.customer_m;
-import com.bankapp.app.service.customer_implementation;
+import com.bankapp.app.model.Account;
+import com.bankapp.app.model.Customer;
+import com.bankapp.app.service.Customer_implementation;
 
 import jakarta.transaction.Transactional;
 
@@ -32,15 +32,15 @@ import jakarta.transaction.Transactional;
 @RestController
 @RequestMapping("/api/customer")
 @CrossOrigin("http://localhost:3000/")
-public class customer_controller {
+public class Customer_controller {
 	
 	public class custom_response {
-		private customer_m customer_data;
+		private Customer customer_data;
 		private String response;
-		public customer_m getCustomer_data() {
+		public Customer getCustomer_data() {
 			return customer_data;
 		}
-		public void setCustomer_data(customer_m customer_data) {
+		public void setCustomer_data(Customer customer_data) {
 			this.customer_data = customer_data;
 		}
 		public String getResponse() {
@@ -53,25 +53,25 @@ public class customer_controller {
 		
 	}
 	@Autowired
-	private customer_implementation customer_service_provider;
+	private Customer_implementation customer_service_provider;
 	//get mappings start
 	@GetMapping("/testing")
 	public String test() {
 		return "test successful";
 	}
 	@GetMapping("/getAll")
-	public List<customer_m> getAllLogin() {
+	public List<Customer> getAllLogin() {
 		return customer_service_provider.getAllLogin();
 	}
 	@GetMapping("/{id}")
-	public ResponseEntity<customer_m> getById(@PathVariable Integer id ){
+	public ResponseEntity<Customer> getById(@PathVariable Integer id ){
 		return  ResponseEntity.ok(customer_service_provider.getById(id).orElseThrow(
 				()-> new ResourceNotFoundException("Product not found for this id :: " + id)));
 	}
 	@GetMapping("/getByAcc/{id}")
-	public ResponseEntity<customer_m > getCustomerAcc(@PathVariable int id ){
+	public ResponseEntity<Customer > getCustomerAcc(@PathVariable int id ){
 		
-			customer_m customer_acc = customer_service_provider.getCustomerAcc(id).orElseThrow(
+			Customer customer_acc = customer_service_provider.getCustomerAcc(id).orElseThrow(
 					()-> new ResourceNotFoundException("transaction not found for this id :: " + id)
 					);
 			return ResponseEntity.ok(customer_acc);
@@ -81,10 +81,10 @@ public class customer_controller {
 	//get mappings end
 	//post mappings start
 	@PostMapping("/sendData")
-	public ResponseEntity<customer_m > getData(@Validated @RequestBody customer_m log_user){
-		customer_m temp = customer_service_provider.saveLogin(log_user);
+	public ResponseEntity<Customer > getData(@Validated @RequestBody Customer log_user){
+		Customer temp = customer_service_provider.saveLogin(log_user);
 		System.out.println(temp.getAcc_no());
-		customer_m new_temp = customer_service_provider.getById(temp.getId()).orElseThrow();
+		Customer new_temp = customer_service_provider.getById(temp.getId()).orElseThrow();
 		System.out.println(new_temp.getBalance());
 		return ResponseEntity.ok(temp);	
 	}
@@ -92,8 +92,8 @@ public class customer_controller {
 	//post mappings end
 	//update/put mappings start
 	@PutMapping("/update/{id}")
-	public ResponseEntity<customer_m> update_user(@PathVariable int id, @RequestBody customer_m user_details){
-		customer_m find_user = customer_service_provider.getById(id).orElseThrow(
+	public ResponseEntity<Customer> update_user(@PathVariable int id, @RequestBody Customer user_details){
+		Customer find_user = customer_service_provider.getById(id).orElseThrow(
 				()-> new ResourceNotFoundException("Product not found for this id :: " + id));
 		find_user.setAcc_no(user_details.getAcc_no());
 		find_user.setTitle(user_details.getTitle());
@@ -110,14 +110,14 @@ public class customer_controller {
 		find_user.setBalance(user_details.getBalance());
 		find_user.setAccount_status(user_details.getAccount_status());
 		
-		customer_m updated_user = customer_service_provider.saveLogin(find_user);
+		Customer updated_user = customer_service_provider.saveLogin(find_user);
 		return ResponseEntity.ok(updated_user);
 	}
 	//update/put mappings end
 	//delete mappings start
 	@DeleteMapping("/remove/{id}")
 	public String delete_user(@PathVariable int id){
-		customer_m find_user = customer_service_provider.getById(id).orElseThrow(
+		Customer find_user = customer_service_provider.getById(id).orElseThrow(
 				()-> new ResourceNotFoundException("Product not found for this id :: " + id));
 		customer_service_provider.remove_user(find_user);
 		return "user deleted";
