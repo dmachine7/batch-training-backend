@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 
@@ -35,7 +36,21 @@ public class account_m {
 	private String trans_pass;
 	
 	@Column(name = "balance",nullable = false)
+	@Min(value = 0)
 	private int balance;
+	
+	public account_m() {
+		
+	}
+	public account_m(int acc_no, String user_id, int customer_id, String log_pass, String trans_pass,  int balance) {
+		super();
+		this.acc_no = acc_no;
+		this.user_id = user_id;
+		this.customer_id = customer_id;
+		this.log_pass = log_pass;
+		this.trans_pass = trans_pass;
+		this.balance = balance;
+	}
 	public int getBalance() {
 		return balance;
 	}

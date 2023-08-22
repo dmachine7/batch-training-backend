@@ -18,7 +18,6 @@ public class transaction_m {
 	@Id
 	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
 	@Column(name = "trans_id",nullable = false)
-	@NotEmpty(message = "The transaction id can't be Empty")
 	private int trans_id;
 	
 	@Column(name = "send_acc",nullable = false)
@@ -49,6 +48,22 @@ public class transaction_m {
 	@Column(name = "maturity_ins")
 	private String maturity_ins;
 	
+	public transaction_m() {
+        // Default constructor
+    }
+	
+	public transaction_m(int trans_id, String send_acc, String rec_acc, String trans_type, String trans_pass, Date date, long amount, String remarks, String maturity_ins) {
+		super();
+		this.trans_id = trans_id;
+		this.send_acc = send_acc;
+		this.rec_acc = rec_acc;
+		this.trans_type = trans_type;
+		this.trans_pass = trans_pass;
+		this.date = date;
+		this.amount = amount;
+		this.remarks = remarks;
+		this.maturity_ins = maturity_ins;
+	}
 	public int getTrans_id() {
 		return trans_id;
 	}
