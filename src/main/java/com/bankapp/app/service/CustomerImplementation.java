@@ -29,7 +29,7 @@ public class CustomerImplementation implements CustomerService {
 		return customer_repo.findAll();
 	}
 	@Override
-	public Optional<Customer> getById(int id) {
+	public Optional<Customer> getById(String id) {
 		
 		return customer_repo.findById(id);
 	}

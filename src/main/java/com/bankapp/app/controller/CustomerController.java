@@ -64,7 +64,7 @@ public class CustomerController {
 		return customer_service_provider.getAllLogin();
 	}
 	@GetMapping("/{id}")
-	public ResponseEntity<Customer> getById(@PathVariable Integer id ){
+	public ResponseEntity<Customer> getById(@PathVariable String id ){
 		return  ResponseEntity.ok(customer_service_provider.getById(id).orElseThrow(
 				()-> new ResourceNotFoundException("Product not found for this id :: " + id)));
 	}
@@ -84,14 +84,14 @@ public class CustomerController {
 	public ResponseEntity<Customer > getData(@Validated @RequestBody Customer log_user){
 		Customer temp = customer_service_provider.saveLogin(log_user);
 		System.out.println(temp.getAcc_no());
-		Customer new_temp = customer_service_provider.getById(temp.getId()).orElseThrow();
+		Customer new_temp = customer_service_provider.getById(temp.getEmail()).orElseThrow();
 		return ResponseEntity.ok(temp);	
 	}
   
 	//post mappings end
 	//update/put mappings start
 	@PutMapping("/update/{id}")
-	public ResponseEntity<Customer> update_user(@PathVariable int id, @RequestBody Customer user_details){
+	public ResponseEntity<Customer> update_user(@PathVariable String id, @RequestBody Customer user_details){
 		Customer find_user = customer_service_provider.getById(id).orElseThrow(
 				()-> new ResourceNotFoundException("Product not found for this id :: " + id));
 		find_user.setAcc_no(user_details.getAcc_no());
@@ -106,7 +106,6 @@ public class CustomerController {
 		find_user.setRes_address(user_details.getRes_address());
 		find_user.setOcc_type(user_details.getOcc_type());
 		find_user.setGross_annual_income(user_details.getGross_annual_income());
-		find_user.setAccount_status(user_details.getAccount_status());
 		
 		Customer updated_user = customer_service_provider.saveLogin(find_user);
 		return ResponseEntity.ok(updated_user);
@@ -114,7 +113,7 @@ public class CustomerController {
 	//update/put mappings end
 	//delete mappings start
 	@DeleteMapping("/remove/{id}")
-	public String delete_user(@PathVariable int id){
+	public String delete_user(@PathVariable String id){
 		Customer find_user = customer_service_provider.getById(id).orElseThrow(
 				()-> new ResourceNotFoundException("Product not found for this id :: " + id));
 		customer_service_provider.remove_user(find_user);

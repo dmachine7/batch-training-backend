@@ -53,9 +53,9 @@ public class AccountControllerTest {
 
     @Test
     public void getAllAccountsTest() throws Exception {
-    	Account account1 = new Account("1000", "atul", 155, "at", "atul123", 1000);
-    	Account account2 = new Account("1000", "devang", 155, "dev", "dev123", 1000);
-    	Account account3 = new Account("1000", "sahil", 155, "sah", "123", 1000);
+    	Account account1 = new Account("1000", "atul","atul123@mail.com", "at", "atul123", 1000L,0);
+    	Account account2 = new Account("1000", "devang","dev123@mail.com", "dev", "dev123", 1000L,0);
+    	Account account3 = new Account("1000", "sahil","123@mail.com", "sah", "123", 1000L,0);
         List<Account> accounts = Arrays.asList(account1, account2, account3);
 
         when(accountServiceProvider.getAllLogin()).thenReturn(accounts);
@@ -63,9 +63,6 @@ public class AccountControllerTest {
         mockMvc.perform(get("/api/account/getAll"))
                .andExpect(status().isOk())
                .andExpect(jsonPath("$.length()", is(accounts.size())))
-               .andExpect(jsonPath("$[0].user_id", is(accounts.get(0).getUser_id())))
-               .andExpect(jsonPath("$[1].user_id", is(accounts.get(1).getUser_id())))
-               .andExpect(jsonPath("$[2].user_id", is(accounts.get(2).getUser_id())))
                .andExpect(jsonPath("$[0].log_pass", is(accounts.get(0).getLog_pass())))
                .andExpect(jsonPath("$[1].log_pass", is(accounts.get(1).getLog_pass())))
                .andExpect(jsonPath("$[2].log_pass", is(accounts.get(2).getLog_pass())));
@@ -75,46 +72,42 @@ public class AccountControllerTest {
 
     @Test
     public void getAccountByIdTest() throws Exception {
-        Account account = new Account("1000", "rahul", 155, "rah", "rah123", 1000);
+        Account account = new Account("1000", "rahul","rah123", "rah", "rah123", 1000L,0);
         String accountId = "1";
 
         when(accountServiceProvider.getById(accountId)).thenReturn(Optional.of(account));
 
         mockMvc.perform(get("/api/account/{id}", accountId))
                .andExpect(status().isOk())
-               .andExpect(jsonPath("$.user_id", is(account.getUser_id())))
                .andExpect(jsonPath("$.acc_no", is(account.getAcc_no())))
-               .andExpect(jsonPath("$.customer_id", is(account.getCustomer_id())))
+               .andExpect(jsonPath("$.email", is(account.getEmail())))
                .andExpect(jsonPath("$.log_pass", is(account.getLog_pass())))
-               .andExpect(jsonPath("$.trans_pass", is(account.getTrans_pass())))
-               .andExpect(jsonPath("$.balance", is(account.getBalance())));
+               .andExpect(jsonPath("$.trans_pass", is(account.getTrans_pass())));
         
         verify(accountServiceProvider, times(1)).getById(accountId);
     }
 
     @Test
     public void createAccountTest() throws Exception {
-        Account newAccount = new Account("10000", "rohan", 155, "roh", "rohan123", 1000);
+        Account newAccount = new Account("10000", "rohan","rohan123@mail.com", "roh", "rohan123", 1000L,0);
         
         mockMvc.perform(post("/api/account/sendData")
                .contentType(MediaType.APPLICATION_JSON)
                .content(new ObjectMapper().writeValueAsString(newAccount)))
                .andExpect(status().isOk())
-               .andExpect(jsonPath("$.user_id", is(newAccount.getUser_id())))
                .andExpect(jsonPath("$.acc_no", is(newAccount.getAcc_no())))
-               .andExpect(jsonPath("$.customer_id", is(newAccount.getCustomer_id())))
+               .andExpect(jsonPath("$.email", is(newAccount.getEmail())))
                .andExpect(jsonPath("$.log_pass", is(newAccount.getLog_pass())))
-               .andExpect(jsonPath("$.trans_pass", is(newAccount.getTrans_pass())))
-               .andExpect(jsonPath("$.balance", is(newAccount.getBalance())));
+               .andExpect(jsonPath("$.trans_pass", is(newAccount.getTrans_pass())));
        
         verify(accountServiceProvider, times(1)).saveLogin(any());
     }
 
     @Test
     public void updateAccountTest() throws Exception {
-        Account existingAccount = new Account("1000", "atul", 155, "at", "atul123", 1000);
-        Account updatedAccount = new Account("", "atul", 156, "atul", "atul1234", 1000);
-        String accountId = "1";
+        Account existingAccount = new Account("1000", "atul","atul123@mail.com", "at", "atul123", 1000L,0);
+        Account updatedAccount = new Account("10001", "atul","atul1234@mail.com", "atul", "atul1234", 1000L,0);
+        String accountId = "1000";
 
         when(accountServiceProvider.getById(accountId)).thenReturn(Optional.of(existingAccount));
         when(accountServiceProvider.saveLogin(any())).thenReturn(updatedAccount);
@@ -123,20 +116,18 @@ public class AccountControllerTest {
                .contentType(MediaType.APPLICATION_JSON)
                .content(new ObjectMapper().writeValueAsString(updatedAccount)))
                .andExpect(status().isOk())
-               .andExpect(jsonPath("$.user_id", is(updatedAccount.getUser_id())))
                .andExpect(jsonPath("$.acc_no", is(updatedAccount.getAcc_no())))
-               .andExpect(jsonPath("$.customer_id", is(updatedAccount.getCustomer_id())))
+               .andExpect(jsonPath("$.email", is(updatedAccount.getEmail())))
                .andExpect(jsonPath("$.log_pass", is(updatedAccount.getLog_pass())))
-               .andExpect(jsonPath("$.trans_pass", is(updatedAccount.getTrans_pass())))
-               .andExpect(jsonPath("$.balance", is(updatedAccount.getBalance())));
+               .andExpect(jsonPath("$.trans_pass", is(updatedAccount.getTrans_pass())));
 
         verify(accountServiceProvider, times(1)).saveLogin(any());
     }
 
     @Test
     public void deleteAccountTest() throws Exception {
-        Account existingAccount = new Account("1000", "atul", 155, "at", "atul123", 1000);
-        String accountId = "1";
+        Account existingAccount = new Account("1000", "atul", "atul123@mail.com", "at", "atul123", 1000L,0);
+        String accountId = "1000";
 
         when(accountServiceProvider.getById(accountId)).thenReturn(Optional.of(existingAccount));
 
