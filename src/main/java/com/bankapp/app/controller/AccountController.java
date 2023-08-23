@@ -53,7 +53,7 @@ public class AccountController {
 			Account find_user = account_service_provider.getById(id).orElseThrow(
 					()-> new ResourceNotFoundException("account not found for this id :: " + id)
 					);
-			find_user.setUser_id(user_details.getUser_id());
+			find_user.setEmail(user_details.getEmail());
 			find_user.setLog_pass(user_details.getLog_pass());
 			Account updated_user = account_service_provider.saveLogin(find_user);
 			return ResponseEntity.ok(updated_user);

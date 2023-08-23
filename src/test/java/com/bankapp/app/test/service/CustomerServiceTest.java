@@ -41,15 +41,14 @@ public class CustomerServiceTest {
     
     @Test
     public void saveLoginTest() {
-        Customer customer = new Customer(1, "303", "Mr.", "atul", "atul's Father", "1234567891", "atul@gmail.com", "123443211234", "2001-01-01",
-			    "abc", "abc", "employee", "self", 0);
+        Customer customer = new Customer("atul@gmail.com", "303", "Mr.", "atul", "atul's Father", "1234567891",  "123443211234", "2001-01-01",
+			    "abc", "abc", "employee", "self");
        
         when(customerRepository.save(any(Customer.class))).thenReturn(customer);
         
         Customer savedCustomer = customerService.saveLogin(customer);
 
         assertNotNull(savedCustomer);
-        assertEquals(customer.getId(), savedCustomer.getId());
         assertEquals(customer.getAcc_no(), savedCustomer.getAcc_no());
         assertEquals(customer.getTitle(), savedCustomer.getTitle());
         assertEquals(customer.getName(), savedCustomer.getName());
@@ -61,7 +60,6 @@ public class CustomerServiceTest {
         assertEquals(customer.getPer_address(), savedCustomer.getPer_address());
         assertEquals(customer.getRes_address(), savedCustomer.getRes_address());
         assertEquals(customer.getOcc_type(), savedCustomer.getOcc_type());
-        assertEquals(customer.getAccount_status(), savedCustomer.getAccount_status());
         assertEquals(customer.getGross_annual_income(), savedCustomer.getGross_annual_income());
  
         verify(customerRepository, times(1)).save(customer);
@@ -72,12 +70,12 @@ public class CustomerServiceTest {
     @Test
     public void getAllLoginTest() {
         List<Customer> customers = new ArrayList<>();
-        Customer customer1 = new Customer(1, "303", "Mr.", "atul", "atul's Father", "1234567891", "atul@gmail.com", "123443211234", "2001-01-01",
-			    "abc", "abc", "employee", "self", 0);
-	    Customer customer2 = new Customer(2, "303", "Mr.", "devang", "devang's Father", "2345678912", "devang@gmail.com", "023443211234", "2001-01-02",
-				"def", "dec", "employee", "self", 0);
-	    Customer customer3 = new Customer(4,"303", "Mr.", "sahil", "sahil's Father", "3456789123", "sahil@gmail.com", "013443211234", "2001-01-04",
-				"ghi", "ghk", "employee", "self",  0);
+        Customer customer1 = new Customer("atul@gmail.com", "303", "Mr.", "atul", "atul's Father", "1234567891",  "123443211234", "2001-01-01",
+			    "abc", "abc", "employee", "self");
+	    Customer customer2 = new Customer("devang@gmail.com", "303", "Mr.", "devang", "devang's Father", "2345678912",  "023443211234", "2001-01-02",
+				"def", "dec", "employee", "self");
+	    Customer customer3 = new Customer("sahil@gmail.com", "303", "Mr.", "sahil", "sahil's Father", "3456789123",  "013443211234", "2001-01-04",
+				"ghi", "ghk", "employee", "self");
 	    customers = Arrays.asList(customer1, customer2, customer3);
 	 
         when(customerRepository.findAll()).thenReturn(customers);
@@ -88,7 +86,6 @@ public class CustomerServiceTest {
         for (int i = 0; i < customers.size(); i++) {
             Customer expectedCustomer = customers.get(i);
             Customer actualCustomer = retrievedCustomers.get(i);
-            assertEquals(expectedCustomer.getId(), actualCustomer.getId());
             assertEquals(expectedCustomer.getAcc_no(), actualCustomer.getAcc_no());
             assertEquals(expectedCustomer.getTitle(), actualCustomer.getTitle());
             assertEquals(expectedCustomer.getName(), actualCustomer.getName());
@@ -100,7 +97,6 @@ public class CustomerServiceTest {
             assertEquals(expectedCustomer.getPer_address(), actualCustomer.getPer_address());
             assertEquals(expectedCustomer.getRes_address(), actualCustomer.getRes_address());
             assertEquals(expectedCustomer.getOcc_type(), actualCustomer.getOcc_type());
-            assertEquals(expectedCustomer.getAccount_status(), actualCustomer.getAccount_status());
             assertEquals(expectedCustomer.getGross_annual_income(), actualCustomer.getGross_annual_income());
         }
         
@@ -109,16 +105,15 @@ public class CustomerServiceTest {
 
     @Test
     public void getByIdTest() {
-        int customerId = 1;
-        Customer customer = new Customer(1, "303", "Mr.", "atul", "atul's Father", "1234567891", "atul@gmail.com", "123443211234", "2001-01-01",
-			    "abc", "abc", "employee", "self", 0);
+        String customerId = "atul@gmail.com";
+        Customer customer = new Customer("atul@gmail.com", "303", "Mr.", "atul", "atul's Father", "1234567891",  "123443211234", "2001-01-01",
+			    "abc", "abc", "employee", "self");
         when(customerRepository.findById(customerId)).thenReturn(Optional.of(customer));
 
         Optional<Customer> retrievedCustomer = customerService.getById(customerId);
 
         assertTrue(retrievedCustomer.isPresent());
-        assertEquals(customer.getId(), retrievedCustomer.get().getId());
-        assertEquals(customer.getId(), retrievedCustomer.get().getId());
+        assertEquals(customer.getEmail(), retrievedCustomer.get().getEmail());
         assertEquals(customer.getAcc_no(), retrievedCustomer.get().getAcc_no());
         assertEquals(customer.getTitle(), retrievedCustomer.get().getTitle());
         assertEquals(customer.getName(), retrievedCustomer.get().getName());
@@ -130,8 +125,8 @@ public class CustomerServiceTest {
 
     @Test
     public void removeUserTest() {
-        Customer customer = new Customer(1, "303", "Mr.", "atul", "atul's Father", "1234567891", "atul@gmail.com", "123443211234", "2001-01-01",
-			    "abc", "abc", "employee", "self", 0);
+        Customer customer = new Customer( "atul@gmail.com", "303", "Mr.", "atul", "atul's Father", "1234567891", "123443211234", "2001-01-01",
+			    "abc", "abc", "employee", "self");
 
         customerService.remove_user(customer);
 
@@ -140,17 +135,15 @@ public class CustomerServiceTest {
 
     @Test
     public void getCustomerAccTest() {
-        String customerId = "303";
-        Customer customer = new Customer(1, "303", "Mr.", "atul", "atul's Father", "1234567891", "atul@gmail.com", "123443211234", "2001-01-01",
-			    "abc", "abc", "employee", "self", 0);
+        String customerId ="atul@gmail.com";
+        Customer customer = new Customer("atul@gmail.com", "303", "Mr.", "atul", "atul's Father", "1234567891",  "123443211234", "2001-01-01",
+			    "abc", "abc", "employee", "self");
         when(customerRepository.getCustomerAcc(customerId)).thenReturn(Optional.of(customer));
 
         Optional<Customer> retrievedCustomer = customerService.getCustomerAcc(customerId);
 
         assertTrue(retrievedCustomer.isPresent());
-        assertEquals(customer.getId(), retrievedCustomer.get().getId());
-        assertEquals(customer.getId(), retrievedCustomer.get().getId());
-        assertEquals(customer.getId(), retrievedCustomer.get().getId());
+        assertEquals(customer.getEmail(), retrievedCustomer.get().getEmail());
         assertEquals(customer.getAcc_no(), retrievedCustomer.get().getAcc_no());
         assertEquals(customer.getTitle(), retrievedCustomer.get().getTitle());
         assertEquals(customer.getName(), retrievedCustomer.get().getName());

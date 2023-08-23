@@ -21,13 +21,10 @@ public class Account {
 	@Column(name = "acc_no",nullable = false)
 	private String acc_no;
 	
-	@Column(name = "user_id",nullable = false)
-	@NotEmpty(message = "The user id can't be Empty")
+	@Column(name = "email",nullable = false)
+	@NotEmpty(message = "The username can't be Empty")
 	@NotBlank 
-	private String user_id;
-	
-	@Column(name = "customer_id")
-	private int customer_id;
+	private String email;
 	
 	@Column(name = "log_pass",nullable = false)
 	@NotEmpty(message = "The login password can't be Empty")
@@ -41,29 +38,43 @@ public class Account {
 	@Min(value = 0)
 	private long balance;
 	
+
+	@Column(name = "account_status")
+	private int account_status;
+	
+	
 	public Account() {
 		
 	}
-	public Account(String acc_no, String user_id, int customer_id, String log_pass, String trans_pass,  int balance) {
+	public Account(String acc_no, String email, 
+			String customer_email, String log_pass, String trans_pass,
+			long balance, int account_status) {
 		super();
 		this.acc_no = acc_no;
-		this.user_id = user_id;
-		this.customer_id = customer_id;
+		this.email = email;
 		this.log_pass = log_pass;
 		this.trans_pass = trans_pass;
 		this.balance = balance;
+		this.account_status = account_status;
 	}
 
+	public int getAccount_status() {
+		return account_status;
+	}
+	public void setAccount_status(int account_status) {
+		this.account_status = account_status;
+	}
+	
 	public long getBalance() {
 		return balance;
 	}
 	
-	public int getCustomer_id() {
-		return customer_id;
+	public String getEmail() {
+		return email;
 	}
 
-	public void setCustomer_id(int customer_id) {
-		this.customer_id = customer_id;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public void setBalance(long balance) {
@@ -74,12 +85,6 @@ public class Account {
 	}
 	public void setAcc_no(String acc_no) {
 		this.acc_no = acc_no;
-	}
-	public String getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
 	}
 	
 	

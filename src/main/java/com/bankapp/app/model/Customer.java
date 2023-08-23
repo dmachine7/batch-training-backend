@@ -21,9 +21,9 @@ import jakarta.validation.constraints.Size;
 @Table(name = "tbl_customer")
 public class Customer {
 	@Id
-	@GeneratedValue(strategy =  GenerationType.SEQUENCE)
-	@Column(name = "id",nullable = false)
-	private int id;
+	@Column(name = "email",nullable = false)
+	@Email(message = "This is not a valid Email.")
+	private String email;
 
 	@Column(name = "acc_no", nullable = false)
 	private String acc_no ;
@@ -44,10 +44,6 @@ public class Customer {
 	@NotEmpty(message = "Mobile number field can't be empty.")
 	@Size(min = 10, max = 10, message = "Mobile number must be of 10 characters.")
 	private String mobile;
-	
-	@Column(name = "email",nullable = false)
-	@Email(message = "This is not a valid Email.")
-	private String email;
 	
 	@Column(name = "aadhar",nullable = false)
 	@NotEmpty(message = "Aadhar Number field can't be empty.")
@@ -71,12 +67,9 @@ public class Customer {
 	@NotEmpty(message = "gross_annual_income field can't be empty.")
 	private String gross_annual_income;
 	
-	@Column(name = "account_status")
-	private int account_status;
-	
 
 	@OneToMany(cascade = {CascadeType.DETACH, CascadeType.REFRESH})
-	@JoinColumn(name = "customer_id")
+	@JoinColumn(name = "email")
 	private Set<Account>account_mm;
 	
 	
@@ -88,22 +81,21 @@ public class Customer {
 	}
 	public Customer() {}
 	public Customer
-	( int id, 
+	(String email, 
 						String acc_no,
 						String title,
 						String name,
 						String father_name,
 						String mobile,
-						String email,
 						String aadhar,
 						String dob, 
 						String per_address, 
 						String res_address,
 						String occ_type,
-						String gross_annual_income,
-						int account_status) {
+						String gross_annual_income
+						) {
 
-		this.id = id;
+		
 		this.acc_no = acc_no;
 		this.title = title;
 		this.name = name;
@@ -116,15 +108,10 @@ public class Customer {
 		this.res_address = res_address;
 		this.occ_type = occ_type;
 		this.gross_annual_income = gross_annual_income;
-		this.account_status = account_status;
+		
 	}
 
-	public int getAccount_status() {
-		return account_status;
-	}
-	public void setAccount_status(int account_status) {
-		this.account_status = account_status;
-	}
+	
 
 	public String getAcc_no() {
 		return acc_no;
@@ -134,12 +121,7 @@ public class Customer {
 		this.acc_no = acc_no;
 	}
 
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public String getName() {
 		return name;
 	}
