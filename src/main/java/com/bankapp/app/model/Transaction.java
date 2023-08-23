@@ -30,6 +30,7 @@ public class Transaction {
 	
 	@Column(name = "trans_type")
 	private String trans_type;
+	
 	@Column(name = "payment_type")
 	private String payment_type;
 	
@@ -60,6 +61,7 @@ public class Transaction {
 		this.send_acc = send_acc;
 		this.rec_acc = rec_acc;
 		this.trans_type = trans_type;
+		this.payment_type = payment_type;
 		this.trans_pass = trans_pass;
 		this.date = date;
 		this.amount = amount;
@@ -119,6 +121,14 @@ public class Transaction {
 	}
 	public void setMaturity_ins(String maturity_ins) {
 		this.maturity_ins = maturity_ins;
+	}
+
+	public String getPayment_type() {
+		return payment_type;
+	}
+
+	public void setPayment_type(String payment_type) {
+		this.payment_type = payment_type;
 	}
 	
 }

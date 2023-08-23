@@ -36,7 +36,7 @@ public class AccountServiceTest {
 
     @Test
     public void saveLoginTest() {
-        Account account = new Account(1000, "atul", 155, "at", "atul123", 1000);
+        Account account = new Account("1000", "atul", 155, "at", "atul123", 1000);
         
         when(accountRepository.save(any(Account.class))).thenReturn(account);
         
@@ -53,9 +53,9 @@ public class AccountServiceTest {
 
     @Test
     public void getAllLoginTest() {
-    	Account account1 = new Account(1000, "atul", 155, "at", "atul123", 1000);
-    	Account account2 = new Account(1000, "devang", 155, "dev", "dev123", 1000);
-    	Account account3 = new Account(1000, "sahil", 155, "sah", "123", 1000);
+    	Account account1 = new Account("1000", "atul", 155, "at", "atul123", 1000);
+    	Account account2 = new Account("1000", "devang", 155, "dev", "dev123", 1000);
+    	Account account3 = new Account("1000", "sahil", 155, "sah", "123", 1000);
     	List<Account> accounts = Arrays.asList(account1, account2, account3);
     	
         when(accountRepository.findAll()).thenReturn(accounts);
@@ -79,7 +79,7 @@ public class AccountServiceTest {
     @Test
     public void getByIdTest() {
         int accountId = 1;
-        Account account = new Account(1000, "atul", 155, "at", "atul123", 1000);
+        Account account = new Account("1000", "atul", 155, "at", "atul123", 1000);
         
         when(accountRepository.findById(accountId)).thenReturn(Optional.of(account));
 
@@ -97,7 +97,7 @@ public class AccountServiceTest {
 
     @Test
     public void removeUserTest() {
-        Account account = new Account(1000, "atul", 155, "at", "atul123", 1000);
+        Account account = new Account("1000", "atul", 155, "at", "atul123", 1000);
 
         accountService.remove_user(account);
         verify(accountRepository, times(1)).delete(account);

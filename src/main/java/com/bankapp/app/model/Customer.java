@@ -26,7 +26,7 @@ public class Customer {
 	private int id;
 
 	@Column(name = "acc_no", nullable = false)
-	private int acc_no ;
+	private String acc_no ;
 	
 	@Column(name = "title",nullable = false)
 	@NotEmpty(message = "Title field can't be empty.")
@@ -89,7 +89,7 @@ public class Customer {
 	public Customer() {}
 	public Customer
 	( int id, 
-						int acc_no,
+						String acc_no,
 						String title,
 						String name,
 						String father_name,
@@ -126,11 +126,11 @@ public class Customer {
 		this.account_status = account_status;
 	}
 
-	public int getAcc_no() {
+	public String getAcc_no() {
 		return acc_no;
 	}
 
-	public void setAcc_no(int acc_no) {
+	public void setAcc_no(String acc_no) {
 		this.acc_no = acc_no;
 	}
 

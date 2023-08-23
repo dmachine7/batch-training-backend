@@ -37,7 +37,7 @@ public class Customer_implementation implements Customer_service {
 	public void remove_user(Customer to_be_deleted) {
 		customer_repo.delete(to_be_deleted);
 	}
-	public Optional<Customer > getCustomerAcc(int id) {
+	public Optional<Customer > getCustomerAcc(String id) {
 		return customer_repo.getCustomerAcc(id);
 	}
 
