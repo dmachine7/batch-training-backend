@@ -55,11 +55,32 @@ public class TransactionController {
 	//get mappings end
 	//post mappings start
 	@PostMapping("/sendData")
-	public ResponseEntity<Transaction> getData(@Validated @RequestBody Transaction transaction){
-		//Account check = account_service_provider.getById(transaction.getSend_acc()).orElseThrow(
-			//	()-> new ResourceNotFoundException("account not found for this id :: " + id));;
-		transaction_service_provider.saveLogin(transaction);
-		return ResponseEntity.ok(transaction);	
+	public ResponseEntity<String> getData(@Validated @RequestBody Transaction transaction){
+		Account checksend = account_service_provider.getById(transaction.getSend_acc()).orElseThrow(
+				()-> new ResourceNotFoundException("account not found for this id :: " + transaction.getSend_acc()));
+		Account checkrecieve = account_service_provider.getById(transaction.getRec_acc()).orElseThrow(
+				()-> new ResourceNotFoundException("account not found for this id :: " + transaction.getRec_acc()));
+		if(transaction.getPayment_type().compareTo("credit")==0) {
+				try{
+					if(checksend.getBalance()-transaction.getAmount() < 0) {
+				
+					throw new IllegalArgumentException("insufficient balance!");
+				}
+					System.out.println(checksend.getBalance()-transaction.getAmount());
+					checksend.setBalance(checksend.getBalance()-transaction.getAmount());
+					account_service_provider.saveLogin(checksend);
+					checkrecieve.setBalance(checkrecieve.getBalance()+transaction.getAmount());
+					account_service_provider.saveLogin(checkrecieve);	
+					transaction_service_provider.saveLogin(transaction);
+					return ResponseEntity.ok("transaction Successful");
+				}
+				catch(IllegalArgumentException e) {
+					return ResponseEntity.ok("transaction failed:" + e.getMessage());
+				}
+				
+		}
+		return ResponseEntity.ok("Transaction Failed");
+		
     }
 	
 	//post mappings end
