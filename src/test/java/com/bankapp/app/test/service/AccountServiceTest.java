@@ -21,18 +21,18 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.bankapp.app.model.Account;
-import com.bankapp.app.repository.Account_repository;
-import com.bankapp.app.service.Account_implementation;
+import com.bankapp.app.repository.AccountRepository;
+import com.bankapp.app.service.AccountImplementation;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
 public class AccountServiceTest {
 
     @InjectMocks
-    private Account_implementation accountService;
+    private AccountImplementation accountService;
 
     @Mock
-    private Account_repository accountRepository;
+    private AccountRepository accountRepository;
 
     @Test
     public void saveLoginTest() {

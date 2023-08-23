@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.bankapp.app.model.Account;
 
-public interface Account_service {
+public interface AccountService {
 	public Account saveLogin(Account login);
 	public List<Account> getAllLogin();
 	public Optional<Account> getById(int id);

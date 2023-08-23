@@ -21,18 +21,18 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.bankapp.app.model.Customer;
-import com.bankapp.app.repository.Customer_repository;
-import com.bankapp.app.service.Customer_implementation;
+import com.bankapp.app.repository.CustomerRepository;
+import com.bankapp.app.service.CustomerImplementation;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
 public class CustomerServiceTest {
 
     @InjectMocks
-    private Customer_implementation customerService;
+    private CustomerImplementation customerService;
 
     @Mock
-    private Customer_repository customerRepository;
+    private CustomerRepository customerRepository;
 
     @Test
     public void sampleTest() {

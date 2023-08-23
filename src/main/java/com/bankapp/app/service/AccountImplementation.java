@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bankapp.app.model.Account;
-import com.bankapp.app.repository.Account_repository;
+import com.bankapp.app.repository.AccountRepository;
 
 @Service
-public class Account_implementation implements Account_service{
+public class AccountImplementation implements AccountService{
 	
 	@Autowired
-	private Account_repository account_repo;
+	private AccountRepository account_repo;
 
 	@Override
 	public Account saveLogin(Account login) {

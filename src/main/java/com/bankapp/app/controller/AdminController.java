@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bankapp.app.controller.Customer_controller.custom_response;
+import com.bankapp.app.controller.CustomerController.custom_response;
 import com.bankapp.app.exception.ResourceNotFoundException;
 import com.bankapp.app.model.Admin;
-import com.bankapp.app.service.Admin_implementation;
+import com.bankapp.app.service.AdminImplementation;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,10 +25,10 @@ import jakarta.servlet.http.HttpServletRequest;
 @RestController
 @RequestMapping("/auth/admin")
 @CrossOrigin("http://localhost:3000/")
-public class Admin_controller {
+public class AdminController {
 
 	@Autowired
-	private Admin_implementation admin_service_provider;
+	private AdminImplementation admin_service_provider;
 	
 	public static class login_body {
 		private String username;

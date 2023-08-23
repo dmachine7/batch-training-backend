@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 
 import com.bankapp.app.exception.ResourceNotFoundException;
 import com.bankapp.app.model.Transaction;
-import com.bankapp.app.repository.Transaction_repository;
+import com.bankapp.app.repository.TransactionRepository;
 
 @Service
-public class Transaction_implementation implements Transaction_service{
+public class TransactionImplementation implements TransactionService{
 	@Autowired
-	private Transaction_repository transaction_repo;
+	private TransactionRepository transaction_repo;
 
 	@Override
 	public Transaction saveLogin(Transaction transaction) {
