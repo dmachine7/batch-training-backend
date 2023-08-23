@@ -39,7 +39,7 @@ public class Account {
 	
 	@Column(name = "balance",nullable = false)
 	@Min(value = 0)
-	private int balance;
+	private long balance;
 	
 	public Account() {
 		
@@ -54,7 +54,7 @@ public class Account {
 		this.balance = balance;
 	}
 
-	public int getBalance() {
+	public long getBalance() {
 		return balance;
 	}
 	
@@ -66,7 +66,7 @@ public class Account {
 		this.customer_id = customer_id;
 	}
 
-	public void setBalance(int balance) {
+	public void setBalance(long balance) {
 		this.balance = balance;
 	}
 	public String getAcc_no() {
