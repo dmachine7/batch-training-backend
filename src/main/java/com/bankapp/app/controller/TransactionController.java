@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bankapp.app.exception.ResourceNotFoundException;
+import com.bankapp.app.model.Account;
 import com.bankapp.app.model.Transaction;
 import com.bankapp.app.service.AccountImplementation;
 import com.bankapp.app.service.TransactionImplementation;
@@ -55,7 +56,8 @@ public class TransactionController {
 	//post mappings start
 	@PostMapping("/sendData")
 	public ResponseEntity<Transaction> getData(@Validated @RequestBody Transaction transaction){
-		
+		//Account check = account_service_provider.getById(transaction.getSend_acc()).orElseThrow(
+			//	()-> new ResourceNotFoundException("account not found for this id :: " + id));;
 		transaction_service_provider.saveLogin(transaction);
 		return ResponseEntity.ok(transaction);	
     }

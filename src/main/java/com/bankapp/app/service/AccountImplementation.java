@@ -26,7 +26,7 @@ public class AccountImplementation implements AccountService{
 	}
 
 	@Override
-	public Optional<Account> getById(int id) {
+	public Optional<Account> getById(String id) {
 		return account_repo.findById(id);
 	}
 

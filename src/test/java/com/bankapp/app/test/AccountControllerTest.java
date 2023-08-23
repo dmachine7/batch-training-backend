@@ -76,7 +76,7 @@ public class AccountControllerTest {
     @Test
     public void getAccountByIdTest() throws Exception {
         Account account = new Account("1000", "rahul", 155, "rah", "rah123", 1000);
-        int accountId = 1;
+        String accountId = "1";
 
         when(accountServiceProvider.getById(accountId)).thenReturn(Optional.of(account));
 
@@ -114,7 +114,7 @@ public class AccountControllerTest {
     public void updateAccountTest() throws Exception {
         Account existingAccount = new Account("1000", "atul", 155, "at", "atul123", 1000);
         Account updatedAccount = new Account("", "atul", 156, "atul", "atul1234", 1000);
-        int accountId = 1;
+        String accountId = "1";
 
         when(accountServiceProvider.getById(accountId)).thenReturn(Optional.of(existingAccount));
         when(accountServiceProvider.saveLogin(any())).thenReturn(updatedAccount);
@@ -136,7 +136,7 @@ public class AccountControllerTest {
     @Test
     public void deleteAccountTest() throws Exception {
         Account existingAccount = new Account("1000", "atul", 155, "at", "atul123", 1000);
-        int accountId = 1;
+        String accountId = "1";
 
         when(accountServiceProvider.getById(accountId)).thenReturn(Optional.of(existingAccount));
 
