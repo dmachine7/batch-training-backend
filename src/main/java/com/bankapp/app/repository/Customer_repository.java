@@ -11,6 +11,6 @@ import com.bankapp.app.model.Customer;
 @Repository
 public interface Customer_repository extends JpaRepository<Customer,Integer>{
 	@Query(value = "select * from tbl_customer t where t.acc_no = ?1 ", nativeQuery = true)
-	 public Optional<Customer> getCustomerAcc(int acc_no);
+	 public Optional<Customer> getCustomerAcc(String acc_no);
 
 }

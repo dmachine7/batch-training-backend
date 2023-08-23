@@ -69,7 +69,7 @@ public class Customer_controller {
 				()-> new ResourceNotFoundException("Product not found for this id :: " + id)));
 	}
 	@GetMapping("/getByAcc/{id}")
-	public ResponseEntity<Customer > getCustomerAcc(@PathVariable int id ){
+	public ResponseEntity<Customer > getCustomerAcc(@PathVariable String id ){
 		
 			Customer customer_acc = customer_service_provider.getCustomerAcc(id).orElseThrow(
 					()-> new ResourceNotFoundException("transaction not found for this id :: " + id)

@@ -19,7 +19,7 @@ import jakarta.validation.constraints.NotEmpty;
 public class Account {
 	@Id
 	@Column(name = "acc_no",nullable = false)
-	private int acc_no;
+	private String acc_no;
 	
 	@Column(name = "user_id",nullable = false)
 	@NotEmpty(message = "The user id can't be Empty")
@@ -44,7 +44,7 @@ public class Account {
 	public Account() {
 		
 	}
-	public Account(int acc_no, String user_id, int customer_id, String log_pass, String trans_pass,  int balance) {
+	public Account(String acc_no, String user_id, int customer_id, String log_pass, String trans_pass,  int balance) {
 		super();
 		this.acc_no = acc_no;
 		this.user_id = user_id;
@@ -69,10 +69,10 @@ public class Account {
 	public void setBalance(int balance) {
 		this.balance = balance;
 	}
-	public int getAcc_no() {
+	public String getAcc_no() {
 		return acc_no;
 	}
-	public void setAcc_no(int acc_no) {
+	public void setAcc_no(String acc_no) {
 		this.acc_no = acc_no;
 	}
 	public String getUser_id() {

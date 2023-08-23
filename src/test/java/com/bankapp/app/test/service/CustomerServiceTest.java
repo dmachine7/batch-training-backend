@@ -41,7 +41,7 @@ public class CustomerServiceTest {
     
     @Test
     public void saveLoginTest() {
-        Customer customer = new Customer(1, 303, "Mr.", "atul", "atul's Father", "1234567891", "atul@gmail.com", "123443211234", "2001-01-01",
+        Customer customer = new Customer(1, "303", "Mr.", "atul", "atul's Father", "1234567891", "atul@gmail.com", "123443211234", "2001-01-01",
 			    "abc", "abc", "employee", "self", 0);
        
         when(customerRepository.save(any(Customer.class))).thenReturn(customer);
@@ -72,11 +72,11 @@ public class CustomerServiceTest {
     @Test
     public void getAllLoginTest() {
         List<Customer> customers = new ArrayList<>();
-        Customer customer1 = new Customer(1, 303, "Mr.", "atul", "atul's Father", "1234567891", "atul@gmail.com", "123443211234", "2001-01-01",
+        Customer customer1 = new Customer(1, "303", "Mr.", "atul", "atul's Father", "1234567891", "atul@gmail.com", "123443211234", "2001-01-01",
 			    "abc", "abc", "employee", "self", 0);
-	    Customer customer2 = new Customer(2, 303, "Mr.", "devang", "devang's Father", "2345678912", "devang@gmail.com", "023443211234", "2001-01-02",
+	    Customer customer2 = new Customer(2, "303", "Mr.", "devang", "devang's Father", "2345678912", "devang@gmail.com", "023443211234", "2001-01-02",
 				"def", "dec", "employee", "self", 0);
-	    Customer customer3 = new Customer(4, 303, "Mr.", "sahil", "sahil's Father", "3456789123", "sahil@gmail.com", "013443211234", "2001-01-04",
+	    Customer customer3 = new Customer(4,"303", "Mr.", "sahil", "sahil's Father", "3456789123", "sahil@gmail.com", "013443211234", "2001-01-04",
 				"ghi", "ghk", "employee", "self",  0);
 	    customers = Arrays.asList(customer1, customer2, customer3);
 	 
@@ -110,7 +110,7 @@ public class CustomerServiceTest {
     @Test
     public void getByIdTest() {
         int customerId = 1;
-        Customer customer = new Customer(1, 303, "Mr.", "atul", "atul's Father", "1234567891", "atul@gmail.com", "123443211234", "2001-01-01",
+        Customer customer = new Customer(1, "303", "Mr.", "atul", "atul's Father", "1234567891", "atul@gmail.com", "123443211234", "2001-01-01",
 			    "abc", "abc", "employee", "self", 0);
         when(customerRepository.findById(customerId)).thenReturn(Optional.of(customer));
 
@@ -130,7 +130,7 @@ public class CustomerServiceTest {
 
     @Test
     public void removeUserTest() {
-        Customer customer = new Customer(1, 303, "Mr.", "atul", "atul's Father", "1234567891", "atul@gmail.com", "123443211234", "2001-01-01",
+        Customer customer = new Customer(1, "303", "Mr.", "atul", "atul's Father", "1234567891", "atul@gmail.com", "123443211234", "2001-01-01",
 			    "abc", "abc", "employee", "self", 0);
 
         customerService.remove_user(customer);
@@ -140,8 +140,8 @@ public class CustomerServiceTest {
 
     @Test
     public void getCustomerAccTest() {
-        int customerId = 1;
-        Customer customer = new Customer(1, 303, "Mr.", "atul", "atul's Father", "1234567891", "atul@gmail.com", "123443211234", "2001-01-01",
+        String customerId = "303";
+        Customer customer = new Customer(1, "303", "Mr.", "atul", "atul's Father", "1234567891", "atul@gmail.com", "123443211234", "2001-01-01",
 			    "abc", "abc", "employee", "self", 0);
         when(customerRepository.getCustomerAcc(customerId)).thenReturn(Optional.of(customer));
 
