@@ -85,7 +85,6 @@ public class Customer_controller {
 		Customer temp = customer_service_provider.saveLogin(log_user);
 		System.out.println(temp.getAcc_no());
 		Customer new_temp = customer_service_provider.getById(temp.getId()).orElseThrow();
-		System.out.println(new_temp.getBalance());
 		return ResponseEntity.ok(temp);	
 	}
   
@@ -107,7 +106,6 @@ public class Customer_controller {
 		find_user.setRes_address(user_details.getRes_address());
 		find_user.setOcc_type(user_details.getOcc_type());
 		find_user.setGross_annual_income(user_details.getGross_annual_income());
-		find_user.setBalance(user_details.getBalance());
 		find_user.setAccount_status(user_details.getAccount_status());
 		
 		Customer updated_user = customer_service_provider.saveLogin(find_user);
