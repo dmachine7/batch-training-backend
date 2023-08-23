@@ -37,7 +37,8 @@ public class TransactionServiceTest {
 
     @Test
     public void saveLoginTest() {
-        Transaction transaction = new Transaction(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
+        Transaction transaction = new Transaction(1, "1234567890", "9876543210", "Transfer", "credit",
+        		"myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
         when(transactionRepository.save(any(Transaction.class))).thenReturn(transaction);
 
         Transaction savedTransaction = transactionService.saveLogin(transaction);
@@ -47,6 +48,7 @@ public class TransactionServiceTest {
         assertEquals(transaction.getSend_acc(), savedTransaction.getSend_acc());
         assertEquals(transaction.getRec_acc(), savedTransaction.getRec_acc());
         assertEquals(transaction.getTrans_type(), savedTransaction.getTrans_type());
+        assertEquals(transaction.getPayment_type(), savedTransaction.getPayment_type());
         assertEquals(transaction.getTrans_pass(), savedTransaction.getTrans_pass());
         assertEquals(transaction.getDate(), savedTransaction.getDate());
         assertEquals(transaction.getAmount(), savedTransaction.getAmount());
@@ -59,9 +61,9 @@ public class TransactionServiceTest {
     @Test
     public void getAllLoginTest() {
         List<Transaction> transactions = new ArrayList<>();
-        Transaction transaction1 = new Transaction(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
-    	Transaction transaction2 = new Transaction(2, "1234567590", "98765432101", "Transfer", "myPassword123", new Date(), 10000L, "Payment for services", "2023-12-31");
-    	Transaction transaction3 = new Transaction(3, "1234567690", "9666543210", "Transfer", "myPassword123", new Date(), 2000L, "Payment for services", "2023-12-31");
+        Transaction transaction1 = new Transaction(1, "1234567890", "9876543210", "Transfer", "credit", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
+    	Transaction transaction2 = new Transaction(2, "1234567590", "98765432101", "Transfer", "credit", "myPassword123", new Date(), 10000L, "Payment for services", "2023-12-31");
+    	Transaction transaction3 = new Transaction(3, "1234567690", "9666543210", "Transfer", "credit",  "myPassword123", new Date(), 2000L, "Payment for services", "2023-12-31");
         transactions = Arrays.asList(transaction1 ,transaction2, transaction3);
         
         when(transactionRepository.findAll()).thenReturn(transactions);
@@ -90,9 +92,9 @@ public class TransactionServiceTest {
     @Test
     public void getByAccTest() {
     	List<Transaction> transactions = new ArrayList<>();
-        Transaction transaction1 = new Transaction(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
-     	Transaction transaction2 = new Transaction(2, "1234567590", "98765432101", "Transfer", "myPassword123", new Date(), 10000L, "Payment for services", "2023-12-31");
-     	Transaction transaction3 = new Transaction(3, "1234567690", "9666543210", "Transfer", "myPassword123", new Date(), 2000L, "Payment for services", "2023-12-31");
+        Transaction transaction1 = new Transaction(1, "1234567890", "9876543210", "Transfer",  "credit", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
+     	Transaction transaction2 = new Transaction(2, "1234567590", "98765432101", "Transfer", "credit", "myPassword123", new Date(), 10000L, "Payment for services", "2023-12-31");
+     	Transaction transaction3 = new Transaction(3, "1234567690", "9666543210", "Transfer",   "credit","myPassword123", new Date(), 2000L, "Payment for services", "2023-12-31");
         transactions = Arrays.asList(transaction1 ,transaction2, transaction3);
         int accountId = 1;
         when(transactionRepository.getAccountTrans(accountId)).thenReturn(Optional.of(transactions));
@@ -107,7 +109,7 @@ public class TransactionServiceTest {
 
     @Test
     public void removeUserTest() {
-        Transaction transaction = new Transaction(1, "1234567890", "9876543210", "Transfer", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
+        Transaction transaction = new Transaction(1, "1234567890", "9876543210", "Transfer",  "credit", "myPassword123", new Date(), 1000L, "Payment for services", "2023-12-31");
 
         transactionService.remove_user(transaction);
 

@@ -55,7 +55,7 @@ public class TransactionController {
 	//get mappings end
 	//post mappings start
 	@PostMapping("/sendData")
-	public ResponseEntity<String> getData(@Validated @RequestBody Transaction transaction){
+	public ResponseEntity<Transaction> getData(@Validated @RequestBody Transaction transaction){
 		Account checksend = account_service_provider.getById(transaction.getSend_acc()).orElseThrow(
 				()-> new ResourceNotFoundException("account not found for this id :: " + transaction.getSend_acc()));
 		Account checkrecieve = account_service_provider.getById(transaction.getRec_acc()).orElseThrow(
@@ -72,14 +72,15 @@ public class TransactionController {
 					checkrecieve.setBalance(checkrecieve.getBalance()+transaction.getAmount());
 					account_service_provider.saveLogin(checkrecieve);	
 					transaction_service_provider.saveLogin(transaction);
-					return ResponseEntity.ok("transaction Successful");
+					return ResponseEntity.ok(transaction);
 				}
 				catch(IllegalArgumentException e) {
-					return ResponseEntity.ok("transaction failed:" + e.getMessage());
+					return ResponseEntity.status(400)
+							.body(transaction);//.ok("transaction failed:" + e.getMessage());
 				}
 				
 		}
-		return ResponseEntity.ok("Transaction Failed");
+		return ResponseEntity.status(400).body(transaction);
 		
     }
 	
