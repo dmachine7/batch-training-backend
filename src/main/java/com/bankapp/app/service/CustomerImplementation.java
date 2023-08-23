@@ -7,17 +7,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bankapp.app.model.Customer;
-import com.bankapp.app.repository.Customer_repository;
+import com.bankapp.app.repository.CustomerRepository;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.Persistence;
 import jakarta.transaction.Transactional;
 
 @Service
-public class Customer_implementation implements Customer_service {
+public class CustomerImplementation implements CustomerService {
 	
 	@Autowired
-	private Customer_repository customer_repo;
+	private CustomerRepository customer_repo;
 	@Override
 	public Customer saveLogin(Customer login) {
 		Customer temp =  customer_repo.save(login);

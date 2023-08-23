@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.bankapp.app.model.Customer;
 
-public interface Customer_service {
+public interface CustomerService {
 	public Customer saveLogin(Customer login);
 	public List<Customer> getAllLogin();
 	public Optional<Customer> getById(int id);

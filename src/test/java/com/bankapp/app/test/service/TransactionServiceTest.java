@@ -22,18 +22,18 @@ import org.mockito.junit.MockitoJUnitRunner;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.bankapp.app.model.Transaction;
-import com.bankapp.app.repository.Transaction_repository;
-import com.bankapp.app.service.Transaction_implementation;
+import com.bankapp.app.repository.TransactionRepository;
+import com.bankapp.app.service.TransactionImplementation;
 
 @SpringBootTest
 @RunWith(MockitoJUnitRunner.class)
 public class TransactionServiceTest {
 
     @InjectMocks
-    private Transaction_implementation transactionService;
+    private TransactionImplementation transactionService;
 
     @Mock
-    private Transaction_repository transactionRepository;
+    private TransactionRepository transactionRepository;
 
     @Test
     public void saveLoginTest() {

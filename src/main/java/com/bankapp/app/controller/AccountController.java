@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.bankapp.app.exception.ResourceNotFoundException;
 import com.bankapp.app.model.Account;
-import com.bankapp.app.service.Account_implementation;
+import com.bankapp.app.service.AccountImplementation;
 
 @RestController
 @RequestMapping("/api/account")
 @CrossOrigin("http://localhost:3000/")
-public class Account_controller {
+public class AccountController {
 	@Autowired
-	private Account_implementation account_service_provider;
+	private AccountImplementation account_service_provider;
 	//get mappings start
 	@GetMapping("/testing")
 	public String test() {

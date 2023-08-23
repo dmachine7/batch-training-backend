@@ -7,13 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.bankapp.app.model.Admin;
-import com.bankapp.app.repository.Admin_repository;
+import com.bankapp.app.repository.AdminRepository;
 
 @Service
-public class Admin_implementation implements Admin_service{
+public class AdminImplementation implements AdminService{
 	
 	@Autowired
-	private Admin_repository admin_repo;
+	private AdminRepository admin_repo;
 
 	@Override
 	public Optional<Admin> check_login(String username, String password) {

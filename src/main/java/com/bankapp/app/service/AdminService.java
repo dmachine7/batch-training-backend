@@ -5,7 +5,7 @@ import java.util.Optional;
 
 import com.bankapp.app.model.Admin;
 
-public interface Admin_service {
+public interface AdminService {
 	public Optional<Admin> check_login(String username, String password);
 	//public List<admin_m> getAllLogin();
 	//public Optional<admin_m> getById(int id);

@@ -19,11 +19,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bankapp.app.exception.ControllerExceptionHandler;
-import com.bankapp.app.exception.Exception_m;
+import com.bankapp.app.exception.ExceptionCustom;
 import com.bankapp.app.exception.ResourceNotFoundException;
 import com.bankapp.app.model.Account;
 import com.bankapp.app.model.Customer;
-import com.bankapp.app.service.Customer_implementation;
+import com.bankapp.app.service.CustomerImplementation;
 
 import jakarta.transaction.Transactional;
 
@@ -32,7 +32,7 @@ import jakarta.transaction.Transactional;
 @RestController
 @RequestMapping("/api/customer")
 @CrossOrigin("http://localhost:3000/")
-public class Customer_controller {
+public class CustomerController {
 	
 	public class custom_response {
 		private Customer customer_data;
@@ -53,7 +53,7 @@ public class Customer_controller {
 		
 	}
 	@Autowired
-	private Customer_implementation customer_service_provider;
+	private CustomerImplementation customer_service_provider;
 	//get mappings start
 	@GetMapping("/testing")
 	public String test() {

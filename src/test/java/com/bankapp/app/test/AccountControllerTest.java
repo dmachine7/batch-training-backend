@@ -28,9 +28,9 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.bankapp.app.controller.Account_controller;
+import com.bankapp.app.controller.AccountController;
 import com.bankapp.app.model.Account;
-import com.bankapp.app.service.Account_implementation;
+import com.bankapp.app.service.AccountImplementation;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
@@ -40,10 +40,10 @@ public class AccountControllerTest {
     private MockMvc mockMvc;
 
     @InjectMocks
-    private Account_controller accountController;
+    private AccountController accountController;
 
     @Mock
-    private Account_implementation accountServiceProvider;
+    private AccountImplementation accountServiceProvider;
 
     @BeforeEach
     public void setup() {

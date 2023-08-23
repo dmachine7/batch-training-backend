@@ -30,10 +30,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.bankapp.app.controller.Transaction_controller;
+import com.bankapp.app.controller.TransactionController;
 import com.bankapp.app.model.Customer;
 import com.bankapp.app.model.Transaction;
-import com.bankapp.app.service.Transaction_implementation;
+import com.bankapp.app.service.TransactionImplementation;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -42,10 +42,10 @@ public class TransactionControllerTest {
     private MockMvc mockMvc;
 
     @InjectMocks
-    private Transaction_controller transactionController;
+    private TransactionController transactionController;
 
     @Mock
-    private Transaction_implementation transactionServiceProvider;
+    private TransactionImplementation transactionServiceProvider;
 
     @BeforeEach
     public void setup() {

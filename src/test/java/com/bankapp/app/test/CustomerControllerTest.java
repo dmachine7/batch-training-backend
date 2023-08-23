@@ -38,9 +38,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-import com.bankapp.app.controller.Customer_controller;
+import com.bankapp.app.controller.CustomerController;
 import com.bankapp.app.model.Customer;
-import com.bankapp.app.service.Customer_implementation;
+import com.bankapp.app.service.CustomerImplementation;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
@@ -58,10 +58,10 @@ class CustomerControllerTest {
     private MockMvc mockMvc;
 	
 	@InjectMocks
-	private Customer_controller customerController;
+	private CustomerController customerController;
 
     @Mock
-    private Customer_implementation customer_service_provider;
+    private CustomerImplementation customer_service_provider;
     
     private List<Customer> customers;
 	

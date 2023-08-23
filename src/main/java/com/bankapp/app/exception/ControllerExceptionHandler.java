@@ -12,32 +12,32 @@ import org.springframework.web.context.request.WebRequest;
 @ControllerAdvice
 public class ControllerExceptionHandler {
 	@ExceptionHandler(ResourceNotFoundException.class)
-	public ResponseEntity<Exception_m> resourceNotFoundException(ResourceNotFoundException ex,
+	public ResponseEntity<ExceptionCustom> resourceNotFoundException(ResourceNotFoundException ex,
 			WebRequest request){
-		Exception_m message = new Exception_m(HttpStatus.NOT_FOUND.value()
+		ExceptionCustom message = new ExceptionCustom(HttpStatus.NOT_FOUND.value()
 				,new Date(),ex.getMessage(),request.getDescription(false));
 		
-		return new ResponseEntity<Exception_m>(message,HttpStatus.NOT_FOUND);	
+		return new ResponseEntity<ExceptionCustom>(message,HttpStatus.NOT_FOUND);	
 	}
 	
 	@ExceptionHandler(value = MethodArgumentNotValidException.class)
-	public ResponseEntity<Exception_m> methodArgumentNotValidException(MethodArgumentNotValidException ex,
+	public ResponseEntity<ExceptionCustom> methodArgumentNotValidException(MethodArgumentNotValidException ex,
 			WebRequest request){
-		Exception_m message = new Exception_m(HttpStatus.INTERNAL_SERVER_ERROR.value()
+		ExceptionCustom message = new ExceptionCustom(HttpStatus.INTERNAL_SERVER_ERROR.value()
 				,new Date(),ex.getBindingResult().
 						getFieldErrors().stream().map(err -> err.getDefaultMessage())
 						.collect(java.util.stream.Collectors.joining(", "))
 				,request.getDescription(false));
 		
-		return new ResponseEntity<Exception_m>(message,HttpStatus.INTERNAL_SERVER_ERROR);	
+		return new ResponseEntity<ExceptionCustom>(message,HttpStatus.INTERNAL_SERVER_ERROR);	
 	}
 	
 	@ExceptionHandler(Exception.class)
-	public ResponseEntity<Exception_m> globalExceptionHandler(Exception ex,
+	public ResponseEntity<ExceptionCustom> globalExceptionHandler(Exception ex,
 			WebRequest request){
-		Exception_m message = new Exception_m(HttpStatus.INTERNAL_SERVER_ERROR.value()
+		ExceptionCustom message = new ExceptionCustom(HttpStatus.INTERNAL_SERVER_ERROR.value()
 				,new Date(),ex.getMessage(),request.getDescription(false));
-		return  new ResponseEntity<Exception_m>(message,HttpStatus.INTERNAL_SERVER_ERROR);	
+		return  new ResponseEntity<ExceptionCustom>(message,HttpStatus.INTERNAL_SERVER_ERROR);	
 		
 	}
 }
