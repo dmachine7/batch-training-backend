@@ -8,7 +8,7 @@ import com.bankapp.app.model.Account;
 public interface AccountService {
 	public Account saveLogin(Account login);
 	public List<Account> getAllLogin();
-	public Optional<Account> getById(int id);
+	public Optional<Account> getById(String id);
 	public void remove_user(Account account);
 
 }

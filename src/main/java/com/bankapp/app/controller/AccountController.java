@@ -35,7 +35,7 @@ public class AccountController {
 		return account_service_provider.getAllLogin();
 	}
 	@GetMapping("/{id}")
-	public ResponseEntity<Account> getById(@PathVariable Integer id ){
+	public ResponseEntity<Account> getById(@PathVariable String id ){
 		return ResponseEntity.ok(account_service_provider.getById(id).orElseThrow(
 				()-> new ResourceNotFoundException("account not found for this id :: " + id)));
 	}
@@ -49,7 +49,7 @@ public class AccountController {
 	//post mappings end
 	//update/put mappings start
 		@PutMapping("/update/{id}")
-		public ResponseEntity<Account> update_user(@PathVariable int id, @RequestBody Account user_details){
+		public ResponseEntity<Account> update_user(@PathVariable String id, @RequestBody Account user_details){
 			Account find_user = account_service_provider.getById(id).orElseThrow(
 					()-> new ResourceNotFoundException("account not found for this id :: " + id)
 					);
@@ -61,7 +61,7 @@ public class AccountController {
 		//update/put mappings end
 		//delete mappings start
 		@DeleteMapping("/remove/{id}")
-		public String delete_user(@PathVariable int id){
+		public String delete_user(@PathVariable String id){
 			Account find_user = account_service_provider.getById(id).orElseThrow(
 					()-> new ResourceNotFoundException("account not found for this id :: " + id)
 					);

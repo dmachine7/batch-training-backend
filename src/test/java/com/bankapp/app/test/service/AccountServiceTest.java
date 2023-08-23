@@ -78,7 +78,7 @@ public class AccountServiceTest {
 
     @Test
     public void getByIdTest() {
-        int accountId = 1;
+        String accountId = "1000";
         Account account = new Account("1000", "atul", 155, "at", "atul123", 1000);
         
         when(accountRepository.findById(accountId)).thenReturn(Optional.of(account));
