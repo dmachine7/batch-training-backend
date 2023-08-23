@@ -54,7 +54,6 @@ public class Customer {
 	@Size(min = 12, max = 12, message = "Aadhar Number must be of 12 characters.")
 	private String aadhar;
 	
-	@DateTimeFormat(pattern = "dd-MM-yyy")
 	@Column(name = "dob",nullable = false)
 	private String dob;
 	
@@ -71,9 +70,8 @@ public class Customer {
 	@Column(name = "gross_annual_income",nullable = false)
 	@NotEmpty(message = "gross_annual_income field can't be empty.")
 	private String gross_annual_income;
-	@Column(name = "balance", nullable = false)
-	private int balance;
-	@Column(name = "account_status", nullable = false)
+	
+	@Column(name = "account_status")
 	private int account_status;
 	
 
@@ -103,7 +101,6 @@ public class Customer {
 						String res_address,
 						String occ_type,
 						String gross_annual_income,
-						int balance,
 						int account_status) {
 
 		this.id = id;
@@ -119,7 +116,6 @@ public class Customer {
 		this.res_address = res_address;
 		this.occ_type = occ_type;
 		this.gross_annual_income = gross_annual_income;
-		this.balance = balance;
 		this.account_status = account_status;
 	}
 
@@ -129,15 +125,7 @@ public class Customer {
 	public void setAccount_status(int account_status) {
 		this.account_status = account_status;
 	}
-	
-	public int getBalance() {
-		return balance;
-	}
 
-	public void setBalance(int balance) {
-		this.balance = balance;
-	}
-	
 	public int getAcc_no() {
 		return acc_no;
 	}
