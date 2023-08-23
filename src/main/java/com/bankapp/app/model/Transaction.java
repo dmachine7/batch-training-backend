@@ -55,7 +55,8 @@ public class Transaction {
         // Default constructor
     }
 	
-	public Transaction(int trans_id, String send_acc, String rec_acc, String trans_type, String trans_pass, Date date, long amount, String remarks, String maturity_ins) {
+	public Transaction(int trans_id, String send_acc, String rec_acc, String trans_type,
+			String payment_type, String trans_pass, Date date, long amount, String remarks, String maturity_ins) {
 		super();
 		this.trans_id = trans_id;
 		this.send_acc = send_acc;
