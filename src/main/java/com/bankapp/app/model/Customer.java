@@ -63,6 +63,8 @@ public class Customer {
 	@NotEmpty(message = "gross_annual_income field can't be empty.")
 	private String gross_annual_income;
 	
+	@Column(name = "accountStatus",nullable = false)
+	private String accountStatus;
 
 	@OneToMany(cascade = {CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name = "email")
@@ -88,7 +90,8 @@ public class Customer {
 						String per_address, 
 						String res_address,
 						String occ_type,
-						String gross_annual_income
+						String gross_annual_income,
+						String accountStatus
 						) {
 
 		
@@ -104,9 +107,17 @@ public class Customer {
 		this.res_address = res_address;
 		this.occ_type = occ_type;
 		this.gross_annual_income = gross_annual_income;
+		this.accountStatus = accountStatus;
 		
 	}
 
+
+	public String getAccountStatus() {
+		return accountStatus;
+	}
+	public void setAccountStatus(String accountStatus) {
+		this.accountStatus = accountStatus;
+	}
 	
 
 	public String getAcc_no() {
