@@ -53,9 +53,9 @@ public class AccountControllerTest {
 
     @Test
     public void getAllAccountsTest() throws Exception {
-    	Account account1 = new Account("1000", "atul","atul123@mail.com", "at", "atul123", 1000L,0);
-    	Account account2 = new Account("1000", "devang","dev123@mail.com", "dev", "dev123", 1000L,0);
-    	Account account3 = new Account("1000", "sahil","123@mail.com", "sah", "123", 1000L,0);
+    	Account account1 = new Account("1000", "atul","atul123@mail.com", "at", "atul123", 1000L,0,0);
+    	Account account2 = new Account("1000", "devang","dev123@mail.com", "dev", "dev123", 1000L,0,0);
+    	Account account3 = new Account("1000", "sahil","123@mail.com", "sah", "123", 1000L,0,0);
         List<Account> accounts = Arrays.asList(account1, account2, account3);
 
         when(accountServiceProvider.getAllLogin()).thenReturn(accounts);
@@ -72,7 +72,7 @@ public class AccountControllerTest {
 
     @Test
     public void getAccountByIdTest() throws Exception {
-        Account account = new Account("1000", "rahul","rah123", "rah", "rah123", 1000L,0);
+        Account account = new Account("1000", "rahul","rah123", "rah", "rah123", 1000L,0,0);
         String accountId = "1";
 
         when(accountServiceProvider.getById(accountId)).thenReturn(Optional.of(account));
@@ -89,7 +89,7 @@ public class AccountControllerTest {
 
     @Test
     public void createAccountTest() throws Exception {
-        Account newAccount = new Account("10000", "rohan","rohan123@mail.com", "roh", "rohan123", 1000L,0);
+        Account newAccount = new Account("10000", "rohan","rohan123@mail.com", "roh", "rohan123", 1000L,0,0);
         
         mockMvc.perform(post("/api/account/sendData")
                .contentType(MediaType.APPLICATION_JSON)
@@ -105,8 +105,8 @@ public class AccountControllerTest {
 
     @Test
     public void updateAccountTest() throws Exception {
-        Account existingAccount = new Account("1000", "atul","atul123@mail.com", "at", "atul123", 1000L,0);
-        Account updatedAccount = new Account("10001", "atul","atul1234@mail.com", "atul", "atul1234", 1000L,0);
+        Account existingAccount = new Account("1000", "atul","atul123@mail.com", "at", "atul123", 1000L,0,0);
+        Account updatedAccount = new Account("10001", "atul","atul1234@mail.com", "atul", "atul1234", 1000L,0,0);
         String accountId = "1000";
 
         when(accountServiceProvider.getById(accountId)).thenReturn(Optional.of(existingAccount));
@@ -126,7 +126,7 @@ public class AccountControllerTest {
 
     @Test
     public void deleteAccountTest() throws Exception {
-        Account existingAccount = new Account("1000", "atul", "atul123@mail.com", "at", "atul123", 1000L,0);
+        Account existingAccount = new Account("1000", "atul", "atul123@mail.com", "at", "atul123", 1000L,0,0);
         String accountId = "1000";
 
         when(accountServiceProvider.getById(accountId)).thenReturn(Optional.of(existingAccount));
