@@ -1,16 +1,18 @@
 [
     {
-        "acc_no": 100,
-        "user_id": "rahul",
-        "customer_id": 1,
+        "acc_no": "100",
+        "email": "rahul@mail.com",
         "log_pass": "rahul",
-        "trans_pass": "rahul"
+        "trans_pass": "rahul",
+        "balance": 100,
+        "account_status": 1
     },
     {
-        "acc_no": 101,
-        "user_id": "atul",
-        "customer_id": 2,
-        "log_pass": "atul",
-        "trans_pass": "atul"
+        "acc_no": "101",
+        "email": "singh@mail.com",
+        "log_pass": "singh",
+        "trans_pass": "singh",
+        "balance": 200,
+        "account_status": 1
     }
 ]
