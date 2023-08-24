@@ -2,9 +2,7 @@ package com.bankapp.app.controller;
 
 import java.util.List;
 
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -15,17 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.bankapp.app.exception.ControllerExceptionHandler;
-import com.bankapp.app.exception.ExceptionCustom;
 import com.bankapp.app.exception.ResourceNotFoundException;
-import com.bankapp.app.model.Account;
 import com.bankapp.app.model.Customer;
 import com.bankapp.app.service.CustomerImplementation;
 
-import jakarta.transaction.Transactional;
 
 
 
@@ -84,7 +77,6 @@ public class CustomerController {
 	public ResponseEntity<Customer > getData(@Validated @RequestBody Customer log_user){
 		Customer temp = customer_service_provider.saveLogin(log_user);
 		System.out.println(temp.getAcc_no());
-		Customer new_temp = customer_service_provider.getById(temp.getEmail()).orElseThrow();
 		return ResponseEntity.ok(temp);	
 	}
   
