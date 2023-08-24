@@ -71,11 +71,11 @@ class CustomerControllerTest {
 		 MockitoAnnotations.openMocks(this);
 	     mockMvc = MockMvcBuilders.standaloneSetup(customerController).build();
 		 Customer customer1 = new Customer( "atul@gmail.com", "303", "Mr.", "atul", "atul's Father", "1234567891", "123443211234", "2001-01-01",
-				    "abc", "abc", "employee", "self");
+				    "abc", "abc", "employee", "self", "pending");
 		 Customer customer2 = new Customer( "devang@gmail.com", "303", "Mr.", "devang", "devang's Father", "2345678912", "023443211234", "2001-01-02",
-					"def", "dec", "employee", "self");
+					"def", "dec", "employee", "self","pending");
 		 Customer customer3 = new Customer("sahil@gmail.com", "303", "Mr.", "sahil", "sahil's Father", "3456789123",  "013443211234", "2001-01-04",
-					"ghi", "ghk", "employee", "self");
+					"ghi", "ghk", "employee", "self", "pending");
 		 
 		 customers = Arrays.asList(customer1, customer2, customer3);
 	}
@@ -123,8 +123,7 @@ class CustomerControllerTest {
 	@Test
 	public void createCustomerTest() throws Exception {  		
 		Customer newCustomer = new Customer( "rahul@gmail.com", "411", "Mr.", "rahul", "rahul's Father", "4567891234", "000043211234", "2001-01-05",
-			    "pqr", "pqrs", "employee", "self");
-        when(customer_service_provider.getById(anyString())).thenReturn(Optional.of(newCustomer));
+			    "pqr", "pqrs", "employee", "self", "pending");
         when(customer_service_provider.saveLogin(any(Customer.class))).thenReturn(newCustomer);
         
         mockMvc.perform(post("/api/customer/sendData")
@@ -142,7 +141,7 @@ class CustomerControllerTest {
                 .andExpect(jsonPath("$.occ_type", is(newCustomer.getOcc_type())))
                 .andExpect(jsonPath("$.gross_annual_income", is(newCustomer.getGross_annual_income())));
         
-        verify(customer_service_provider, times(1)).getById("rahul@gmail.com");
+        verify(customer_service_provider, times(1)).saveLogin(any(Customer.class));
         
 	}
 	    
@@ -150,7 +149,7 @@ class CustomerControllerTest {
 	    @Test
 	    public void updateCustomerTest() throws Exception {
 	        Customer updatedCustomer = new Customer("rahul@gmail.com", "304", "Mr.", "rahul", "rahul's Father", "4567891234", "000043211234", "2001-01-05",
-				    "pqr", "pqrs", "employee", "self");
+				    "pqr", "pqrs", "employee", "self", "pending");
 	        
 	        when(customer_service_provider.getById(anyString())).thenReturn(Optional.of(updatedCustomer));
 	        when(customer_service_provider.saveLogin(any())).thenReturn(updatedCustomer);
@@ -177,7 +176,7 @@ class CustomerControllerTest {
 	    @Test
 	    public void deleteCustomerTest() throws Exception {
 	    	Customer customerToRemove =  new Customer("sahil@gmail.com", "303", "Mr.", "sahil", "sahil's Father", "3456789123", "013443211234", "2001-01-04",
-					"ghi", "ghk", "employee", "self");
+					"ghi", "ghk", "employee", "self","pending");
 	    	when(customer_service_provider.getById(anyString())).thenReturn(Optional.of(customerToRemove));
 	        mockMvc.perform(delete("/api/customer/remove/sahil@gmail.com"))
 	                .andExpect(status().isOk());
