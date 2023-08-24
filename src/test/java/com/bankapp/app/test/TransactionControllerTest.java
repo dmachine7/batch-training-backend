@@ -105,10 +105,10 @@ public class TransactionControllerTest {
         		new Date(), 100L, "Payment for services", "2023-12-31");       
         when(transactionServiceProvider.saveLogin(any())).thenReturn(newTransaction);
         
-        Account accountsend = new Account("1234567890", "rahul","rah123", "rah", "rah123", 1000L,0);
+        Account accountsend = new Account("1234567890", "rahul","rah123", "rah", "rah123", 1000L,0,0);
         when(accountServiceProvider.getById("1234567890")).thenReturn(Optional.of(accountsend));
         
-        Account accountrecieve = new Account("10987654321001", "rahul","rah123", "rah", "rah123", 1000L,0);
+        Account accountrecieve = new Account("10987654321001", "rahul","rah123", "rah", "rah123", 1000L,0,0);
         when(accountServiceProvider.getById("9876543210")).thenReturn(Optional.of(accountrecieve));
         
         mockMvc.perform(post("/api/transaction/sendData")

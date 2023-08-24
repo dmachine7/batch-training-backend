@@ -32,10 +32,12 @@ public class Account {
 	@Column(name = "balance",nullable = false)
 	@Min(value = 0)
 	private long balance;
-	
 
 	@Column(name = "account_status")
 	private int account_status;
+	
+	@Column(name = "isAdmin", nullable = false)
+	private int isAdmin;
 	
 	
 	public Account() {
@@ -43,7 +45,7 @@ public class Account {
 	}
 	public Account(String acc_no, String email, 
 			String customer_email, String log_pass, String trans_pass,
-			long balance, int account_status) {
+			long balance, int account_status, int isAdmin) {
 		super();
 		this.acc_no = acc_no;
 		this.email = email;
@@ -51,7 +53,16 @@ public class Account {
 		this.trans_pass = trans_pass;
 		this.balance = balance;
 		this.account_status = account_status;
+		this.isAdmin = isAdmin;
 	}
+	
+	public int getIsAdmin() {
+		return isAdmin;
+	}
+	public void setIsAdmin(int isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+	
 
 	public int getAccount_status() {
 		return account_status;

@@ -36,7 +36,7 @@ public class AccountServiceTest {
 
     @Test
     public void saveLoginTest() {
-        Account account = new Account("1000", "atul", "atul@mail.com", "at", "atul123", 1000,0);
+        Account account = new Account("1000", "atul", "atul@mail.com", "at", "atul123", 1000,0,0);
         
         when(accountRepository.save(any(Account.class))).thenReturn(account);
         
@@ -53,9 +53,9 @@ public class AccountServiceTest {
 
     @Test
     public void getAllLoginTest() {
-    	Account account1 = new Account("1000", "atul", "atul123@mail.com", "at", "atul123", 1000,0);
-    	Account account2 = new Account("1000", "devang", "dev123@mail.com", "dev", "dev123", 1000,0);
-    	Account account3 = new Account("1000", "sahil","123@mail.com", "sah", "123", 1000,0);
+    	Account account1 = new Account("1000", "atul", "atul123@mail.com", "at", "atul123", 1000,0,0);
+    	Account account2 = new Account("1000", "devang", "dev123@mail.com", "dev", "dev123", 1000,0,0);
+    	Account account3 = new Account("1000", "sahil","123@mail.com", "sah", "123", 1000,0,0);
     	List<Account> accounts = Arrays.asList(account1, account2, account3);
     	
         when(accountRepository.findAll()).thenReturn(accounts);
@@ -79,7 +79,7 @@ public class AccountServiceTest {
     @Test
     public void getByIdTest() {
         String accountId = "1000";
-        Account account = new Account("1000", "atul","atul123@mail.com", "at", "atul123", 1000L,0);
+        Account account = new Account("1000", "atul","atul123@mail.com", "at", "atul123", 1000L,0,0);
         
         when(accountRepository.findById(accountId)).thenReturn(Optional.of(account));
 
@@ -96,7 +96,7 @@ public class AccountServiceTest {
 
     @Test
     public void removeUserTest() {
-        Account account = new Account("1000", "atul","atul123@mail.com", "at", "atul123", 1000L,0);
+        Account account = new Account("1000", "atul","atul123@mail.com", "at", "atul123", 1000L,0,0);
 
         accountService.remove_user(account);
         verify(accountRepository, times(1)).delete(account);
