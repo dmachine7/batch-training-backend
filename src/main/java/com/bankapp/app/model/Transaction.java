@@ -34,10 +34,6 @@ public class Transaction {
 	@Column(name = "payment_type")
 	private String payment_type;
 	
-	@Column(name = "trans_pass",nullable = false)
-	@NotEmpty(message = "The transaction password can't be Empty")
-	private String trans_pass;
-	
 	@DateTimeFormat(pattern = "dd-MM-yyy")
 	@Column(name = "date",nullable = false)
 	private Date date;
@@ -56,14 +52,13 @@ public class Transaction {
     }
 	
 	public Transaction(int trans_id, String send_acc, String rec_acc, String trans_type,
-			String payment_type, String trans_pass, Date date, long amount, String remarks, String maturity_ins) {
+			String payment_type, Date date, long amount, String remarks, String maturity_ins) {
 		super();
 		this.trans_id = trans_id;
 		this.send_acc = send_acc;
 		this.rec_acc = rec_acc;
 		this.trans_type = trans_type;
 		this.payment_type = payment_type;
-		this.trans_pass = trans_pass;
 		this.date = date;
 		this.amount = amount;
 		this.remarks = remarks;
@@ -92,12 +87,6 @@ public class Transaction {
 	}
 	public void setTrans_type(String trans_type) {
 		this.trans_type = trans_type;
-	}
-	public String getTrans_pass() {
-		return trans_pass;
-	}
-	public void setTrans_pass(String trans_pass) {
-		this.trans_pass = trans_pass;
 	}
 	public Date getDate() {
 		return date;
