@@ -10,6 +10,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 
 @Entity
@@ -39,6 +40,7 @@ public class Transaction {
 	private Date date;
 	
 	@Column(name = "amount",nullable = false)
+	@Min(value = 0,message = "invalid amount")
 	private long amount;
 	
 	@Column(name = "remarks")
