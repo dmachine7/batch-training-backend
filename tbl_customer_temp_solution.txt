@@ -1,37 +1,50 @@
 [
     {
-        "id": 1,
-        "acc_no": 1001,
-         title": "Mr",
-        "name": "singh",
-        "father_name": "rahul",
-        "mobile": "1234567890",
-        "email": "rahul@temp.com",
-        "aadhar": "123443211234",
-        "dob": "2023-08-10T18:30:00.000+00:00",
+        "email": "rahul@mail.com",
+        "acc_no": "100",
+        "title": "Mr.",
+        "name": "rahul",
+        "father_name": "rahul's father",
+        "mobile": "1234567891",
+        "aadhar": "123456789011",
+        "dob": "2001-01-01",
         "per_address": "abc",
-        "res_address": "qsw",
-        "occ_type": "employee",
-        "source_income": "self",
+        "res_address": "abc",
+        "occ_type": "self",
         "gross_annual_income": "100",
-        "account_status": 0
-        
+        "account_m": [
+            {
+                "acc_no": "100",
+                "email": "rahul@mail.com",
+                "log_pass": "rahul",
+                "trans_pass": "rahul",
+                "balance": 100,
+                "account_status": 1
+            }
+        ]
     },
     {
-        "id": 2,
-        "acc_no":1002,
-        "title": "Mr",
-        "name": "atul",
-        "father_name": "atul",
-        "mobile": "9876543211",
-        "email": "atul@temp.com`",
-        "aadhar": "324145677689",
-        "dob": "2023-08-10T18:30:00.000+00:00",
-        "per_address": "def",
-        "res_address": "def",
-        "occ_type": "employee",
-        "source_income": "self",
-        "gross_annual_income": "100"
-        "account_status":0
+        "email": "singh@mail.com",
+        "acc_no": "101",
+        "title": "Mr.",
+        "name": "rahul",
+        "father_name": "rahul's father",
+        "mobile": "1234567891",
+        "aadhar": "123456789011",
+        "dob": "2001-01-01",
+        "per_address": "abc",
+        "res_address": "abc",
+        "occ_type": "self",
+        "gross_annual_income": "100",
+        "account_m": [
+            {
+                "acc_no": "101",
+                "email": "singh@mail.com",
+                "log_pass": "singh",
+                "trans_pass": "singh",
+                "balance": 200,
+                "account_status": 1
+            }
+        ]
     }
 ]
