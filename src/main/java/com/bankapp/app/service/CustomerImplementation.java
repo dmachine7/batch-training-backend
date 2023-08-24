@@ -9,9 +9,6 @@ import org.springframework.stereotype.Service;
 import com.bankapp.app.model.Customer;
 import com.bankapp.app.repository.CustomerRepository;
 
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.Persistence;
-import jakarta.transaction.Transactional;
 
 @Service
 public class CustomerImplementation implements CustomerService {
