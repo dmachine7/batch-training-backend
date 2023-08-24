@@ -1,13 +1,46 @@
 package com.bankapp.app.entity;
 
-import com.bankapp.app.entity.AuthResponse.AuthResponseBuilder;
-
-//@Data
 
 public class AuthResponse {
 
     private String jwtToken;
     private String username;
+    private String accNo;
+    private long balance;
+    private int accStatus;
+    
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getAccNo() {
+		return accNo;
+	}
+
+	public void setAccNo(String accNo) {
+		this.accNo = accNo;
+	}
+
+	public long getBalance() {
+		return balance;
+	}
+
+	public void setBalance(long balance) {
+		this.balance = balance;
+	}
+
+	public int getAccStatus() {
+		return accStatus;
+	}
+
+	public void setAccStatus(int accStatus) {
+		this.accStatus = accStatus;
+	}
+
 	public static AuthResponseBuilder builder() {
 		return new AuthResponseBuilder();
 	}
@@ -25,6 +58,21 @@ public class AuthResponse {
 			return this;
 		}
 		
+		public AuthResponseBuilder accNo(String accNo) {
+			authResponse.setAccNo(accNo);
+			return this;
+		}
+		
+		public AuthResponseBuilder balance(long balance) {
+			authResponse.setBalance(balance);
+			return this;
+		}
+		
+		public AuthResponseBuilder accStatus(int accStatus) {
+			authResponse.setAccStatus(accStatus);
+			return this;
+		}
+		
 		public AuthResponse build() {
 			return authResponse;
 		}
@@ -33,6 +81,7 @@ public class AuthResponse {
 		return jwtToken;
 	}
 	
+
 	public void setJwtToken(String jwtToken) {
 		this.jwtToken = jwtToken;
 	}
@@ -46,7 +95,6 @@ public class AuthResponse {
 	}
 	
     
-    
-    
 }
+
 

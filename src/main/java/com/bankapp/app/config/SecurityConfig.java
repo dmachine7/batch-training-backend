@@ -33,7 +33,7 @@ public class SecurityConfig {
         http.csrf(csrf-> csrf.disable())
                 .cors(cors->cors.disable())
                 .authorizeHttpRequests(auth->auth//.requestMatchers(new AntPathRequestMatcher("/api/**")).authenticated()
-                .requestMatchers(new AntPathRequestMatcher("/**")).permitAll()
+                .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
                 .requestMatchers(new AntPathRequestMatcher("/*")).permitAll().anyRequest().authenticated())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

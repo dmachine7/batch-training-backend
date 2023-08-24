@@ -35,5 +35,10 @@ public class AccountImplementation implements AccountService{
 		account_repo.delete(account);
 		
 	}
+	
+	@Override
+    public  Optional<Account> getAccountByEmailId(String emailId) {
+        return account_repo.findByEmail(emailId);
+    }
 
 }

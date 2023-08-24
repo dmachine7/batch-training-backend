@@ -10,5 +10,6 @@ public interface AccountService {
 	public List<Account> getAllLogin();
 	public Optional<Account> getById(String id);
 	public void remove_user(Account account);
+	public Optional<Account> getAccountByEmailId(String emailId);
 
 }
