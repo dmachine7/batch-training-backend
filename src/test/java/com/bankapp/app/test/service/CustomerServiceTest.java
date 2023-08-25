@@ -42,7 +42,7 @@ public class CustomerServiceTest {
     @Test
     public void saveLoginTest() {
         Customer customer = new Customer("atul@gmail.com", "303", "Mr.", "atul", "atul's Father", "1234567891",  "123443211234", "2001-01-01",
-			    "abc", "abc", "employee", "self", "pending");
+			    "abc", "abc", "employee", "self", 0);
        
         when(customerRepository.save(any(Customer.class))).thenReturn(customer);
         
@@ -71,11 +71,11 @@ public class CustomerServiceTest {
     public void getAllLoginTest() {
         List<Customer> customers = new ArrayList<>();
         Customer customer1 = new Customer("atul@gmail.com", "303", "Mr.", "atul", "atul's Father", "1234567891",  "123443211234", "2001-01-01",
-			    "abc", "abc", "employee", "100", "pending");
+			    "abc", "abc", "employee", "100",0);
 	    Customer customer2 = new Customer("devang@gmail.com", "303", "Mr.", "devang", "devang's Father", "2345678912",  "023443211234", "2001-01-02",
-				"def", "dec", "employee", "100","pending");
+				"def", "dec", "employee", "100",0);
 	    Customer customer3 = new Customer("sahil@gmail.com", "303", "Mr.", "sahil", "sahil's Father", "3456789123",  "013443211234", "2001-01-04",
-				"ghi", "ghk", "employee", "self","pending");
+				"ghi", "ghk", "employee", "self",0);
 	    customers = Arrays.asList(customer1, customer2, customer3);
 	 
         when(customerRepository.findAll()).thenReturn(customers);
@@ -107,7 +107,7 @@ public class CustomerServiceTest {
     public void getByIdTest() {
         String customerId = "atul@gmail.com";
         Customer customer = new Customer("atul@gmail.com", "303", "Mr.", "atul", "atul's Father", "1234567891",  "123443211234", "2001-01-01",
-			    "abc", "abc", "employee", "100", "pending");
+			    "abc", "abc", "employee", "100", 0);
         when(customerRepository.findById(customerId)).thenReturn(Optional.of(customer));
 
         Optional<Customer> retrievedCustomer = customerService.getById(customerId);
@@ -126,7 +126,7 @@ public class CustomerServiceTest {
     @Test
     public void removeUserTest() {
         Customer customer = new Customer( "atul@gmail.com", "303", "Mr.", "atul", "atul's Father", "1234567891", "123443211234", "2001-01-01",
-			    "abc", "abc", "employee", "self","pending");
+			    "abc", "abc", "employee", "self",0);
 
         customerService.remove_user(customer);
 
@@ -137,7 +137,7 @@ public class CustomerServiceTest {
     public void getCustomerAccTest() {
         String customerId ="atul@gmail.com";
         Customer customer = new Customer("atul@gmail.com", "303", "Mr.", "atul", "atul's Father", "1234567891",  "123443211234", "2001-01-01",
-			    "abc", "abc", "employee", "self","pending");
+			    "abc", "abc", "employee", "self",0);
         when(customerRepository.getCustomerAcc(customerId)).thenReturn(Optional.of(customer));
 
         Optional<Customer> retrievedCustomer = customerService.getCustomerAcc(customerId);
