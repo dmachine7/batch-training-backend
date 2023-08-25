@@ -64,7 +64,7 @@ public class Customer {
 	private String gross_annual_income;
 	
 	@Column(name = "accountStatus",nullable = false)
-	private String accountStatus;
+	private int accountStatus;
 
 	@OneToMany(cascade = {CascadeType.DETACH, CascadeType.REFRESH})
 	@JoinColumn(name = "email")
@@ -91,7 +91,7 @@ public class Customer {
 						String res_address,
 						String occ_type,
 						String gross_annual_income,
-						String accountStatus
+						int accountStatus
 						) {
 
 		
@@ -112,10 +112,10 @@ public class Customer {
 	}
 
 
-	public String getAccountStatus() {
+	public int getAccountStatus() {
 		return accountStatus;
 	}
-	public void setAccountStatus(String accountStatus) {
+	public void setAccountStatus(int accountStatus) {
 		this.accountStatus = accountStatus;
 	}
 	
