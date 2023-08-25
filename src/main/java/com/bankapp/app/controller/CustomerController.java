@@ -1,6 +1,6 @@
 package com.bankapp.app.controller;
 
-import java.util.List;
+import java.util.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -98,6 +98,7 @@ public class CustomerController {
 		find_user.setRes_address(user_details.getRes_address());
 		find_user.setOcc_type(user_details.getOcc_type());
 		find_user.setGross_annual_income(user_details.getGross_annual_income());
+		find_user.setAccountStatus(user_details.getAccountStatus());
 		
 		Customer updated_user = customer_service_provider.saveLogin(find_user);
 		return ResponseEntity.ok(updated_user);
