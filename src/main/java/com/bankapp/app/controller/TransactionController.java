@@ -50,10 +50,7 @@ public class TransactionController {
 		if(trans_list.isEmpty())
 			return ResponseEntity.status(500).body(trans_list);
 		return ResponseEntity.ok(trans_list);
-				
 			
-		
-		
 	}
 	
 	//get mappings end

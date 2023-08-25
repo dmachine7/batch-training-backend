@@ -22,7 +22,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 public class SecurityConfig {
 
-
     @Autowired
     private JwtAuthenticationException point;
     @Autowired
