@@ -8,17 +8,15 @@ public class AuthResponse {
     private String accNo;
     private long balance;
     private int accStatus;
-<<<<<<< HEAD
     private String password;
-    
+    private int isAdmin;
 	public String getPassword() {
 		return password;
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
-=======
-    private int isAdmin;
+		this.password = password;}
+
     
 	public int getIsAdmin() {
 		return isAdmin;
@@ -26,7 +24,6 @@ public class AuthResponse {
 
 	public void setIsAdmin(int isAdmin) {
 		this.isAdmin = isAdmin;
->>>>>>> 3df46cf647166766e111dba0e0fea6b75adf250f
 	}
 
 	public String getUsername() {

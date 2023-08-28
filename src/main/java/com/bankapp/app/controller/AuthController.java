@@ -62,11 +62,8 @@ public class AuthController {
                     .accNo(accountDetails.getAcc_no())
                     .balance(accountDetails.getBalance())
                     .accStatus(accountDetails.getAccount_status())
-<<<<<<< HEAD
-                    .password(accountDetails.getTrans_pass()).build();
-=======
+                    .password(accountDetails.getTrans_pass())
                     .isAdmin(accountDetails.getIsAdmin()).build();
->>>>>>> 3df46cf647166766e111dba0e0fea6b75adf250f
                    
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
