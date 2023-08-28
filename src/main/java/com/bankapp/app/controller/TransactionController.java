@@ -133,7 +133,8 @@ public class TransactionController {
 		return ResponseEntity.ok(response);
 	}
 	@PostMapping("/sendDataSelf")
-	public ResponseEntity<Map<String,Object>> sendDataSelf(@Validated @RequestBody Transaction transaction,@RequestParam String password){
+	public ResponseEntity<Map<String,Object>> sendDataSelf(@Validated @RequestBody Transaction transaction
+			){//,@RequestParam String password){
 		Map<String, Object> response = new HashMap<>();
 		Account checksend = new Account();
 		Account checkrecieve = new Account();
@@ -174,7 +175,7 @@ public class TransactionController {
 					response.put("transaction", transaction);
 					return ResponseEntity.ok(response);
 		}
-		else if(transaction.getPayment_type().compareTo("credit")==0 &&  checksend.getTrans_pass().equals(password)) {
+		else if(transaction.getPayment_type().compareTo("credit")==0 ){//&&  checksend.getTrans_pass().equals(password)) {
 			System.out.println(checksend.getBalance()+transaction.getAmount());
 			checksend.setBalance(checksend.getBalance()+transaction.getAmount());
 			account_service_provider.saveLogin(checksend);
