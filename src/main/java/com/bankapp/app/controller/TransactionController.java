@@ -83,8 +83,8 @@ public class TransactionController {
 	//get mappings end
 	//post mappings start
 	@PostMapping("/sendData")
-	public ResponseEntity<Map<String,Object>> getData(@Validated @RequestBody Transaction transaction,
-			@RequestParam String password){
+	public ResponseEntity<Map<String,Object>> getData(@Validated @RequestBody Transaction transaction
+			){//,@RequestParam String password){
 		Map<String, Object> response = new HashMap<>();
 		Account checksend = new Account();
 		Account checkrecieve = new Account();
@@ -109,7 +109,7 @@ public class TransactionController {
 			return ResponseEntity.ok(response);
 		}
 		transaction.setDate(new Date());
-		if(checkrecieve.getAccount_status()==1 && checksend.getTrans_pass()==password) {
+		if(checkrecieve.getAccount_status()==1 ) {//&& checksend.getTrans_pass()==password) {
 					if(checksend.getBalance()-transaction.getAmount() < 0) {
 						response.put("success", false);
 						response.put("message", "insufficient balance!");
@@ -158,7 +158,7 @@ public class TransactionController {
 			return ResponseEntity.ok(response);
 		}
 		transaction.setDate(new Date());
-		if(transaction.getPayment_type().compareTo("debit")==0 && checksend.getTrans_pass().equals(password)) {
+		if(transaction.getPayment_type().compareTo("debit")==0) {//&& checksend.getTrans_pass().equals(password)) {
 					if(checksend.getBalance()-transaction.getAmount() < 0) {
 						response.put("success", false);
 						response.put("message","insufficient balance!");
