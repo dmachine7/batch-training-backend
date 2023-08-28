@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bankapp.app.exception.ResourceNotFoundException;
+import com.bankapp.app.model.Account;
 import com.bankapp.app.model.Customer;
+import com.bankapp.app.service.AccountImplementation;
 import com.bankapp.app.service.CustomerImplementation;
 
 
@@ -47,6 +49,9 @@ public class CustomerController {
 	}
 	@Autowired
 	private CustomerImplementation customer_service_provider;
+	
+	@Autowired
+	private AccountImplementation account_service_provider;
 	//get mappings start
 	@GetMapping("/testing")
 	public String test() {
@@ -101,6 +106,10 @@ public class CustomerController {
 		find_user.setAccountStatus(user_details.getAccountStatus());
 		
 		Customer updated_user = customer_service_provider.saveLogin(find_user);
+		Account updated_account = account_service_provider.getAccountByEmailId(find_user.getEmail()).orElseThrow(
+				()-> new ResourceNotFoundException("Product not found for this id :: " + id));
+		updated_account.setAccount_status(updated_user.getAccountStatus());
+	    Account updated_user_account = account_service_provider.saveLogin(updated_account);
 		return ResponseEntity.ok(updated_user);
 	}
 	//update/put mappings end
