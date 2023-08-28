@@ -8,7 +8,16 @@ public class AuthResponse {
     private String accNo;
     private long balance;
     private int accStatus;
+    private int isAdmin;
     
+	public int getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(int isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -70,6 +79,11 @@ public class AuthResponse {
 		
 		public AuthResponseBuilder accStatus(int accStatus) {
 			authResponse.setAccStatus(accStatus);
+			return this;
+		}
+		
+		public AuthResponseBuilder isAdmin(int isAdmin) {
+			authResponse.setIsAdmin(isAdmin);
 			return this;
 		}
 		

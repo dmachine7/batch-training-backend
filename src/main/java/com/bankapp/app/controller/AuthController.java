@@ -61,7 +61,8 @@ public class AuthController {
                     .username(accountDetails.getEmail())
                     .accNo(accountDetails.getAcc_no())
                     .balance(accountDetails.getBalance())
-                    .accStatus(accountDetails.getAccount_status()).build();
+                    .accStatus(accountDetails.getAccount_status())
+                    .isAdmin(accountDetails.getIsAdmin()).build();
                    
             return new ResponseEntity<>(response, HttpStatus.OK);
         }
@@ -83,8 +84,8 @@ public class AuthController {
     }
 
     @ExceptionHandler(BadCredentialsException.class)
-    public String exceptionHandler() {
-        return "Invalid Credentials";
+    public ResponseEntity<String> exceptionHandler() {
+    	return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Invalid Credentials");
     }
     
 }
