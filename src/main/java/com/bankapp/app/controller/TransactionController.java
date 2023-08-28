@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.bankapp.app.exception.ResourceNotFoundException;
@@ -60,17 +61,20 @@ public class TransactionController {
 	//get mappings end
 	//post mappings start
 	@PostMapping("/sendData")
-	public ResponseEntity<Transaction> getData(@Validated @RequestBody Transaction transaction){
+	public ResponseEntity<Transaction> getData(@Validated @RequestBody Transaction transaction,
+			@RequestParam String password){
 		Account checksend = account_service_provider.getById(transaction.getSend_acc()).orElseThrow(
 				()-> new ResourceNotFoundException("account not found for this id :: " + transaction.getSend_acc()));
 		Account checkrecieve = account_service_provider.getById(transaction.getRec_acc()).orElseThrow(
 				()-> new ResourceNotFoundException("account not found for this id :: " + transaction.getRec_acc()));
 		transaction.setDate(new Date());
-				try{
+		if(checkrecieve.getAccount_status()==1 && checksend.getTrans_pass()==password) {
+			
+
 					if(checksend.getBalance()-transaction.getAmount() < 0) {
 				
 					throw new IllegalArgumentException("insufficient balance!");
-				}
+					}
 					System.out.println(checksend.getBalance()-transaction.getAmount());
 					checksend.setBalance(checksend.getBalance()-transaction.getAmount());
 					account_service_provider.saveLogin(checksend);
@@ -79,10 +83,11 @@ public class TransactionController {
 					transaction_service_provider.saveLogin(transaction);
 					return ResponseEntity.ok(transaction);
 				}
-				catch(IllegalArgumentException e) {
+				
 					return ResponseEntity.status(400)
 							.body(transaction);//.ok("transaction failed:" + e.getMessage());
-				}
+				
+		
 	}
 	@PostMapping("/sendDataSelf")
 	public ResponseEntity<Transaction> sendDataSelf(@Validated @RequestBody Transaction transaction){
