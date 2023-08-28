@@ -8,6 +8,7 @@ public class AuthResponse {
     private String accNo;
     private long balance;
     private int accStatus;
+<<<<<<< HEAD
     private String password;
     
 	public String getPassword() {
@@ -16,6 +17,16 @@ public class AuthResponse {
 
 	public void setPassword(String password) {
 		this.password = password;
+=======
+    private int isAdmin;
+    
+	public int getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(int isAdmin) {
+		this.isAdmin = isAdmin;
+>>>>>>> 3df46cf647166766e111dba0e0fea6b75adf250f
 	}
 
 	public String getUsername() {
@@ -83,6 +94,11 @@ public class AuthResponse {
 		
 		public AuthResponseBuilder accStatus(int accStatus) {
 			authResponse.setAccStatus(accStatus);
+			return this;
+		}
+		
+		public AuthResponseBuilder isAdmin(int isAdmin) {
+			authResponse.setIsAdmin(isAdmin);
 			return this;
 		}
 		

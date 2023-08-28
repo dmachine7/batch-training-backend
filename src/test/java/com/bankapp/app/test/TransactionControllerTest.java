@@ -112,18 +112,40 @@ public class TransactionControllerTest {
         when(accountServiceProvider.getById("9876543210")).thenReturn(Optional.of(accountrecieve));
         
         mockMvc.perform(post("/api/transaction/sendData")
-               .contentType(MediaType.APPLICATION_JSON)
-               .content(new ObjectMapper().writeValueAsString(newTransaction)))
-               .andExpect(status().isOk())
-               .andExpect(jsonPath("$.send_acc", is(newTransaction.getSend_acc())))
-               .andExpect(jsonPath("$.rec_acc", is(newTransaction.getRec_acc())))
-               .andExpect(jsonPath("$.trans_type", is(newTransaction.getTrans_type())))
-               .andExpect(jsonPath("$.date", is(newTransaction.getDate().getTime()))) 
-               .andExpect(jsonPath("$.amount", is((int) newTransaction.getAmount()))) 
-               .andExpect(jsonPath("$.remarks", is(newTransaction.getRemarks())))
-               .andExpect(jsonPath("$.maturity_ins", is(newTransaction.getMaturity_ins())));
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(newTransaction)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.send_acc", is(newTransaction.getSend_acc())))
+                .andExpect(jsonPath("$.rec_acc", is(newTransaction.getRec_acc())))
+                .andExpect(jsonPath("$.trans_type", is(newTransaction.getTrans_type())))
+                .andExpect(jsonPath("$.date", is(newTransaction.getDate().getTime()))) 
+                .andExpect(jsonPath("$.amount", is((int) newTransaction.getAmount()))) 
+                .andExpect(jsonPath("$.remarks", is(newTransaction.getRemarks())))
+                .andExpect(jsonPath("$.maturity_ins", is(newTransaction.getMaturity_ins())));
 
-        verify(transactionServiceProvider, times(1)).saveLogin(any());
+         verify(transactionServiceProvider, times(1)).saveLogin(any());
+         
+    }
+    
+    @Test
+    public void createTransactionWithNegativeAmountTest() throws Exception {
+        Transaction newTransaction =  new Transaction(4, "1234567890",
+        		"9876543210", "Transfer" ,"credit",
+        		new Date(), -100L, "Payment for services", "2023-12-31");       
+        when(transactionServiceProvider.saveLogin(any())).thenReturn(newTransaction);
+        
+        Account accountsend = new Account("1234567890", "rahul","rah123", "rah", "rah123", 1000L,0,0);
+        when(accountServiceProvider.getById("1234567890")).thenReturn(Optional.of(accountsend));
+        
+        Account accountrecieve = new Account("10987654321001", "rahul","rah123", "rah", "rah123", 1000L,0,0);
+        when(accountServiceProvider.getById("9876543210")).thenReturn(Optional.of(accountrecieve));
+        
+        mockMvc.perform(post("/api/transaction/sendData")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(newTransaction)))
+                .andExpect(status().isBadRequest());
+                
+        
     }
 
     @Test
