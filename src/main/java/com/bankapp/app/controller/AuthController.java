@@ -61,7 +61,8 @@ public class AuthController {
                     .username(accountDetails.getEmail())
                     .accNo(accountDetails.getAcc_no())
                     .balance(accountDetails.getBalance())
-                    .accStatus(accountDetails.getAccount_status()).build();
+                    .accStatus(accountDetails.getAccount_status())
+                    .password(accountDetails.getTrans_pass()).build();
                    
             return new ResponseEntity<>(response, HttpStatus.OK);
         }

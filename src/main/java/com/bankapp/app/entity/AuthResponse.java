@@ -8,7 +8,16 @@ public class AuthResponse {
     private String accNo;
     private long balance;
     private int accStatus;
+    private String password;
     
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
 	public String getUsername() {
 		return username;
 	}
@@ -55,6 +64,10 @@ public class AuthResponse {
 		
 		public AuthResponseBuilder username(String username) {
 			authResponse.setUserName(username);
+			return this;
+		}
+		public AuthResponseBuilder password(String password) {
+			authResponse.setPassword(password);
 			return this;
 		}
 		
