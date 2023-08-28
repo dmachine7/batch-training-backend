@@ -158,7 +158,7 @@ public class TransactionController {
 			return ResponseEntity.ok(response);
 		}
 		transaction.setDate(new Date());
-		if(transaction.getPayment_type().compareTo("debit")==0 && checksend.getTrans_pass()==password) {
+		if(transaction.getPayment_type().compareTo("debit")==0 && checksend.getTrans_pass().equals(password)) {
 					if(checksend.getBalance()-transaction.getAmount() < 0) {
 						response.put("success", false);
 						response.put("message","insufficient balance!");
@@ -169,12 +169,12 @@ public class TransactionController {
 					checksend.setBalance(checksend.getBalance()-transaction.getAmount());
 					account_service_provider.saveLogin(checksend);
 					transaction_service_provider.saveLogin(transaction);
-					response.put("success", false);
+					response.put("success", true);
 					response.put("message","transaction successful");
 					response.put("transaction", transaction);
 					return ResponseEntity.ok(response);
 		}
-		else if(transaction.getPayment_type().compareTo("credit")==0 && checksend.getTrans_pass()==password) {
+		else if(transaction.getPayment_type().compareTo("credit")==0 &&  checksend.getTrans_pass().equals(password)) {
 			System.out.println(checksend.getBalance()+transaction.getAmount());
 			checksend.setBalance(checksend.getBalance()+transaction.getAmount());
 			account_service_provider.saveLogin(checksend);
