@@ -1,6 +1,7 @@
 package com.bankapp.app.controller;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +65,7 @@ public class TransactionController {
 				()-> new ResourceNotFoundException("account not found for this id :: " + transaction.getSend_acc()));
 		Account checkrecieve = account_service_provider.getById(transaction.getRec_acc()).orElseThrow(
 				()-> new ResourceNotFoundException("account not found for this id :: " + transaction.getRec_acc()));
-		//if(transaction.getPayment_type().compareTo("debit")==0) {
+		transaction.setDate(new Date());
 				try{
 					if(checksend.getBalance()-transaction.getAmount() < 0) {
 				
@@ -82,9 +83,33 @@ public class TransactionController {
 					return ResponseEntity.status(400)
 							.body(transaction);//.ok("transaction failed:" + e.getMessage());
 				}
+	}
+	@PostMapping("/sendDataSelf")
+	public ResponseEntity<Transaction> sendDataSelf(@Validated @RequestBody Transaction transaction){
+		Account checksend = account_service_provider.getById(transaction.getSend_acc()).orElseThrow(
+				()-> new ResourceNotFoundException("account not found for this id :: " + transaction.getSend_acc()));
+		Account checkrecieve = account_service_provider.getById(transaction.getRec_acc()).orElseThrow(
+				()-> new ResourceNotFoundException("account not found for this id :: " + transaction.getRec_acc()));
+		transaction.setDate(new Date());
+		if(transaction.getPayment_type().compareTo("debit")==0) {
+					if(checksend.getBalance()-transaction.getAmount() < 0) {
 				
-	//	}
-		//return ResponseEntity.status(400).body(transaction);
+					throw new IllegalArgumentException("insufficient balance!");
+				}
+					System.out.println(checksend.getBalance()-transaction.getAmount());
+					checksend.setBalance(checksend.getBalance()-transaction.getAmount());
+					account_service_provider.saveLogin(checksend);
+					transaction_service_provider.saveLogin(transaction);
+					return ResponseEntity.ok(transaction);
+		}
+		else if(transaction.getPayment_type().compareTo("credit")==0) {
+			System.out.println(checksend.getBalance()+transaction.getAmount());
+			checksend.setBalance(checksend.getBalance()+transaction.getAmount());
+			account_service_provider.saveLogin(checksend);
+			transaction_service_provider.saveLogin(transaction);
+			return ResponseEntity.ok(transaction);
+		}
+		return ResponseEntity.status(400).body(transaction);
 		
     }
 	
